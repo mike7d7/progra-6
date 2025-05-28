@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj41gllb5yk32"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_evkk3"]
+font_size = 60
+font_color = Color(0.27451, 0.858824, 0.160784, 1)
+
+[node name="Control" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "CATALOGO"
+label_settings = SubResource("LabelSettings_evkk3")
+horizontal_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Lorem ipsum dolor sit amet consectetur adipiscing elit rutrum, tempus posuere porttitor natoque iaculis tortor nisi augue, sapien nunc proin auctor vitae cubilia condimentum. Ornare primis curae sed eleifend tortor bibendum, viverra morbi himenaeos dictumst cum, aliquam varius habitasse consequat suscipit. Conubia magnis sociis sem pharetra turpis felis phasellus ultrices cum id, est posuere purus quam laoreet rhoncus eget neque nam, commodo sodales volutpat vulputate dictum pulvinar feugiat ultricies nulla.
+
+Etiam himenaeos nisi condimentum in nibh euismod turpis, ad ultricies senectus metus vel hendrerit. Pulvinar ante sollicitudin feugiat proin mollis massa lacus id facilisis, elementum varius hac vehicula tristique tortor curae penatibus luctus, cubilia cum tempor nulla gravida pharetra per metus. Volutpat nullam lacus ultricies penatibus placerat, quis sed id sodales, facilisis a dictum tempus."
+fit_content = true

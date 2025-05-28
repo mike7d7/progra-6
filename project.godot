@@ -1,0 +1,31 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="progra-6"
+run/main_scene="uid://cfujo3d5gw2lc"
+config/features=PackedStringArray("4.4", "Mobile")
+boot_splash/bg_color=Color(0.92549, 0.956863, 0.913725, 1)
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/BetterTabContainer/plugin.cfg")
+
+[rendering]
+
+renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.92549, 0.956863, 0.913725, 1)

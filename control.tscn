@@ -1,0 +1,88 @@
+[gd_scene load_steps=18 format=3 uid="uid://cfujo3d5gw2lc"]
+
+[ext_resource type="Texture2D" uid="uid://bpjetuk43nimm" path="res://assets/catalog-svgrepo-com.svg" id="1_kbped"]
+[ext_resource type="Texture2D" uid="uid://bpwyvpi2hh4pt" path="res://assets/home-svgrepo-com.svg" id="2_fj5cn"]
+[ext_resource type="Texture2D" uid="uid://w4jrbd1e82cr" path="res://assets/contact-phonebook-support-svgrepo-com.svg" id="3_iy58a"]
+[ext_resource type="Texture2D" uid="uid://dgalsjiethy2y" path="res://assets/shopping-cart-01-svgrepo-com.svg" id="4_6a6wx"]
+[ext_resource type="Script" uid="uid://cpfqmndna3cag" path="res://scripts/tab_bar.gd" id="5_iy58a"]
+[ext_resource type="Script" uid="uid://cxtfepdg0uqig" path="res://addons/BetterTabContainer/BetterTabContainer.gd" id="5_sky72"]
+[ext_resource type="PackedScene" uid="uid://c8kbpwpto362f" path="res://paginas/inicio.tscn" id="6_fj5cn"]
+[ext_resource type="PackedScene" uid="uid://cj41gllb5yk32" path="res://paginas/catalogo.tscn" id="8_6a6wx"]
+[ext_resource type="PackedScene" uid="uid://bcrtd2kbx7vnw" path="res://paginas/contacto.tscn" id="9_0ytqx"]
+[ext_resource type="PackedScene" uid="uid://bti36ntuvjkb6" path="res://paginas/carrito.tscn" id="10_pxugv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6a6wx"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sky72"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fj5cn"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ytqx"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_am1vj"]
+bg_color = Color(0.92549, 0.956863, 0.913725, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxugv"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eh0v1"]
+bg_color = Color(0.92549, 0.956863, 0.913725, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabBar" type="TabBar" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/button_highlight = SubResource("StyleBoxFlat_6a6wx")
+theme_override_styles/button_pressed = SubResource("StyleBoxFlat_sky72")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_fj5cn")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_0ytqx")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_am1vj")
+theme_override_styles/tab_disabled = SubResource("StyleBoxFlat_pxugv")
+theme_override_styles/tab_focus = SubResource("StyleBoxFlat_eh0v1")
+current_tab = 0
+tab_alignment = 1
+tab_count = 4
+tab_0/icon = ExtResource("1_kbped")
+tab_1/icon = ExtResource("2_fj5cn")
+tab_2/icon = ExtResource("3_iy58a")
+tab_3/icon = ExtResource("4_6a6wx")
+script = ExtResource("5_iy58a")
+
+[node name="BetterTabContainer" type="ScrollContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_sky72")
+metadata/_custom_type_script = "uid://cxtfepdg0uqig"
+
+[node name="catalago" parent="VBoxContainer/BetterTabContainer" instance=ExtResource("8_6a6wx")]
+layout_mode = 2
+
+[node name="inicio" parent="VBoxContainer/BetterTabContainer" instance=ExtResource("6_fj5cn")]
+layout_mode = 2
+
+[node name="contacto" parent="VBoxContainer/BetterTabContainer" instance=ExtResource("9_0ytqx")]
+layout_mode = 2
+
+[node name="carrito" parent="VBoxContainer/BetterTabContainer" instance=ExtResource("10_pxugv")]
+layout_mode = 2
+
+[connection signal="tab_clicked" from="VBoxContainer/TabBar" to="VBoxContainer/TabBar" method="_on_tab_clicked"]
