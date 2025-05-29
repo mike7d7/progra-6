@@ -1,8 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8kbpwpto362f"]
+[gd_scene load_steps=3 format=3 uid="uid://c8kbpwpto362f"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_evkk3"]
-font_size = 60
+font_size = 120
 font_color = Color(0.27451, 0.858824, 0.160784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_evkk3"]
+content_margin_left = 64.0
+content_margin_top = 32.0
+content_margin_right = 64.0
+content_margin_bottom = 32.0
+bg_color = Color(0.980392, 1, 0.976471, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
 
 [node name="Control" type="VBoxContainer"]
 anchors_preset = 15
@@ -22,7 +33,11 @@ horizontal_alignment = 1
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Lorem ipsum dolor sit amet consectetur adipiscing elit rutrum, tempus posuere porttitor natoque iaculis tortor nisi augue, sapien nunc proin auctor vitae cubilia condimentum. Ornare primis curae sed eleifend tortor bibendum, viverra morbi himenaeos dictumst cum, aliquam varius habitasse consequat suscipit. Conubia magnis sociis sem pharetra turpis felis phasellus ultrices cum id, est posuere purus quam laoreet rhoncus eget neque nam, commodo sodales volutpat vulputate dictum pulvinar feugiat ultricies nulla.
+theme_override_font_sizes/normal_font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_evkk3")
+bbcode_enabled = true
+text = "[center][font_size=90]¿Sabias que?[/font_size][/center] 
+ipsum dolor sit amet consectetur adipiscing elit rutrum, tempus posuere porttitor natoque iaculis tortor nisi augue, sapien nunc proin auctor vitae cubilia condimentum. Ornare primis curae sed eleifend tortor bibendum, viverra morbi himenaeos dictumst cum, aliquam varius habitasse consequat suscipit. Conubia magnis sociis sem pharetra turpis felis phasellus ultrices cum id, est posuere purus quam laoreet rhoncus eget neque nam, commodo sodales volutpat vulputate dictum pulvinar feugiat ultricies nulla.
 
 Etiam himenaeos nisi condimentum in nibh euismod turpis, ad ultricies senectus metus vel hendrerit. Pulvinar ante sollicitudin feugiat proin mollis massa lacus id facilisis, elementum varius hac vehicula tristique tortor curae penatibus luctus, cubilia cum tempor nulla gravida pharetra per metus. Volutpat nullam lacus ultricies penatibus placerat, quis sed id sodales, facilisis a dictum tempus."
 fit_content = true
