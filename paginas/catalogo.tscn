@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://citg1pgt1wybe"]
+[gd_scene load_steps=10 format=3 uid="uid://citg1pgt1wybe"]
 
 [ext_resource type="Texture2D" uid="uid://btalbox6o82ff" path="res://assets/prod1.png" id="1_cqlnc"]
+[ext_resource type="Script" uid="uid://bkks5krauxefa" path="res://scripts/products.gd" id="1_uic45"]
 [ext_resource type="StyleBox" uid="uid://bp614i8f3hxr2" path="res://paginas/rich_text_label_style.tres" id="2_vanq4"]
 [ext_resource type="Texture2D" uid="uid://bq4n7p4vhfq6v" path="res://assets/prod2.png" id="3_uic45"]
 [ext_resource type="Texture2D" uid="uid://cout603wdge8k" path="res://assets/prod3.png" id="4_sa2ba"]
@@ -27,6 +28,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 60
+script = ExtResource("1_uic45")
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -40,7 +42,7 @@ layout_mode = 2
 texture = ExtResource("1_cqlnc")
 expand_mode = 5
 
-[node name="RichTextLabel4" type="RichTextLabel" parent="VBoxContainer"]
+[node name="RichTextLabel1" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -49,12 +51,30 @@ theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
 text = "[left][font_size=70]Ventilador[/font_size][/left]
 Un ventilador creado a partir de una botella recortada para las hélices y tapas perforadas que sirven como baleros. Se utiliza hilo y un palito como eje.
-[center][font_size=70]$15.00 MXN[/font_size][/center]"
+[font_size=70]$15.00 MXN										[url=cart_prod1][color=green][b][/b][/color][/url][/font_size]
+"
 fit_content = true
 
 [node name="TextureRect2" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_uic45")
+expand_mode = 5
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+theme_override_styles/normal = ExtResource("2_vanq4")
+bbcode_enabled = true
+text = "[left][font_size=70]Organizador Tipo Lapicero[/font_size][/left]
+Un organizador para lápices hecho con tapas, silicón, cartón y fomi. Se crean paredes con las tapas y una base de cartón cubierta con fomi.
+[font_size=70]$15.00 MXN										[url=cart_prod2][color=green][b][/b][/color][/url][/font_size]"
+fit_content = true
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_sa2ba")
 expand_mode = 5
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="VBoxContainer"]
@@ -64,26 +84,9 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 40
 theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
-text = "[left][font_size=70]Organizador Tipo Lapicero[/font_size][/left]
-Un organizador para lápices hecho con tapas, silicón, cartón y fomi. Se crean paredes con las tapas y una base de cartón cubierta con fomi.
-[center][font_size=70]$15.00 MXN[/font_size][/center]"
-fit_content = true
-
-[node name="TextureRect3" type="TextureRect" parent="VBoxContainer"]
-layout_mode = 2
-texture = ExtResource("4_sa2ba")
-expand_mode = 5
-
-[node name="RichTextLabel5" type="RichTextLabel" parent="VBoxContainer"]
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 40
-theme_override_styles/normal = ExtResource("2_vanq4")
-bbcode_enabled = true
 text = "[left][font_size=70]Llavero[/font_size][/left]
 Llaveros hechos fundiendo tapas de plástico. Se reúnen tapas, se colocan entre papel para hornear y se calientan con una plancha para fundirlas y darles forma. Luego se pulen y se les añade el hilo o argolla
-[center][font_size=70]$15.00 MXN[/font_size][/center]"
+[font_size=70]$15.00 MXN										[url=cart_prod3][color=green][b][/b][/color][/url][/font_size]"
 fit_content = true
 
 [node name="TextureRect4" type="TextureRect" parent="VBoxContainer"]
@@ -91,7 +94,7 @@ layout_mode = 2
 texture = ExtResource("5_1nsvt")
 stretch_mode = 5
 
-[node name="RichTextLabel6" type="RichTextLabel" parent="VBoxContainer"]
+[node name="RichTextLabel4" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -100,7 +103,7 @@ theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
 text = "[left][font_size=70]Pantalla de Lámpara[/font_size][/left]
 Una pantalla para lámpara elaborada pegando tapas de plástico siguiendo la forma de un molde. 
-[center][font_size=70]$15.00 MXN[/font_size][/center]"
+[font_size=70]$15.00 MXN										[url=cart_prod4][color=green][b][/b][/color][/url][/font_size]"
 fit_content = true
 
 [node name="TextureRect5" type="TextureRect" parent="VBoxContainer"]
@@ -108,7 +111,7 @@ layout_mode = 2
 texture = ExtResource("6_j1t7g")
 stretch_mode = 5
 
-[node name="RichTextLabel7" type="RichTextLabel" parent="VBoxContainer"]
+[node name="RichTextLabel5" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -117,7 +120,7 @@ theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
 text = "[left][font_size=70]Organizador de Cepillos de Dientes[/font_size][/left]
 Un organizador para cepillos de dientes hecho con dos bocas de botella, un pedazo de tubo (posiblemente PVC) y 14 tapas. Las bocas de botella se colocan en los extremos del tubo y se pegan tapas perforadas para sostener los cepillos.
-[center][font_size=70]$15.00 MXN[/font_size][/center]"
+[font_size=70]$15.00 MXN										[url=cart_prod5][color=green][b][/b][/color][/url][/font_size]"
 fit_content = true
 
 [node name="TextureRect6" type="TextureRect" parent="VBoxContainer"]
@@ -125,7 +128,7 @@ layout_mode = 2
 texture = ExtResource("7_suw8i")
 expand_mode = 5
 
-[node name="RichTextLabel8" type="RichTextLabel" parent="VBoxContainer"]
+[node name="RichTextLabel6" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -134,5 +137,5 @@ theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
 text = "[left][font_size=70]Portavasos[/font_size][/left]
 Portavasos creados lavando y secando taparroscas, luego ordenándolas en forma de flor entre papel para hornear y derritiéndolas con una plancha para moldearlas. Finalmente, se endurecen con agua.
-[center][font_size=70]$15.00 MXN[/font_size][/center]"
+[font_size=70]$15.00 MXN										[url=cart_prod6][color=green][b][/b][/color][/url][/font_size]"
 fit_content = true
