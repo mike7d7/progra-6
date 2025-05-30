@@ -14,14 +14,43 @@ func _init():
 		trash_can_icon_texture = load(TRASH_CAN_ICON_PATH)
 
 func _ready():
-	add_theme_constant_override("separation", CONTAINER_SEPARATION)
-	crear_fila_de_elemento("Documento Importante lkjfñlk aslkjas flñksjdafñj sd")
-	crear_fila_de_elemento("Tarea Pendiente #001")
-	crear_fila_de_elemento("Recordatorio Final")
-	crear_fila_de_elemento("Configuración")
-	crear_fila_de_elemento("Elemento")
-	crear_fila_de_elemento("Elemento")
-	crear_fila_de_elemento("Elemento")
+	var path_al_emisor_desde_better_tab_c = "catalogo/VBoxContainer"
+	var nodo_emisor = get_parent().get_parent().get_node_or_null(path_al_emisor_desde_better_tab_c)
+
+	if nodo_emisor:
+		print("Nodo emisor encontrado: ", nodo_emisor.get_path())
+		var error_code = nodo_emisor.connect("label_meta_info_emitted", Callable(self, "_on_label_info_received"))
+		if error_code == OK:
+			print("Señal del emisor conectada exitosamente.")
+		else:
+			print("Error al conectar la señal del emisor. Código: ", error_code)
+	else:
+		print("Error: No se pudo encontrar el nodo emisor")
+		print("Verifica que 'catalogo' tenga un hijo llamado 'VBoxContainer' (o como se llame realmente) y que este sea el nodo correcto.")
+
+
+func _on_label_info_received(meta_data, label_name):
+	print("Received signal from VBoxContainer!")
+	print("Meta Data: ", meta_data)
+	print("Label Name: ", label_name)
+	#add_theme_constant_override("separation", CONTAINER_SEPARATION)
+	
+	match label_name:
+		"RichTextLabel1":
+			crear_fila_de_elemento("Ventilador")
+		"RichTextLabel2":
+			crear_fila_de_elemento("Organizador Tipo Lapicero")
+		"RichTextLabel3":
+			crear_fila_de_elemento("Llavero")
+		"RichTextLabel4":
+			crear_fila_de_elemento("Pantalla de Lámpara")
+		"RichTextLabel5":
+			crear_fila_de_elemento("Organizador de Cepillos de Dientes")
+		"RichTextLabel6":
+			crear_fila_de_elemento("Portavasos")
+		_:
+			print("Opción no reconocida.")
+
 
 func crear_fila_de_elemento(texto_del_label: String):
 	var style = preload("res://paginas/rich_text_label_style.tres")

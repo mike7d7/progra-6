@@ -1,4 +1,5 @@
 extends VBoxContainer
+signal label_meta_info_emitted(meta_data, label_name)
 
 func _ready():
 	var number_of_labels = 6
@@ -18,3 +19,4 @@ func _ready():
 
 func _on_any_label_meta_clicked(meta_payload, label : RichTextLabel):
 	print("Meta clicked: '", meta_payload, "' in Label: '", label.name, "'")
+	label_meta_info_emitted.emit(meta_payload, label.name)
