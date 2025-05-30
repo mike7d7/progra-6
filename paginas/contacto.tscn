@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://bcrtd2kbx7vnw"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_evkk3"]
-font_size = 60
+[sub_resource type="LabelSettings" id="LabelSettings_2nsbc"]
+font_size = 120
 font_color = Color(0.27451, 0.858824, 0.160784, 1)
 
 [node name="Control" type="VBoxContainer"]
@@ -13,10 +13,10 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="."]
+[node name="Label2" type="Label" parent="."]
 layout_mode = 2
 text = "CONTACTO"
-label_settings = SubResource("LabelSettings_evkk3")
+label_settings = SubResource("LabelSettings_2nsbc")
 horizontal_alignment = 1
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
