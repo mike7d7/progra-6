@@ -7,7 +7,7 @@
 font_size = 120
 font_color = Color(0.27451, 0.858824, 0.160784, 1)
 
-[node name="inicio" type="ScrollContainer"]
+[node name="catalogo" type="ScrollContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
