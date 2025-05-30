@@ -15,25 +15,31 @@ corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[node name="Control" type="VBoxContainer"]
+[node name="inicio" type="ScrollContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 1051.0
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 60
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 text = "INICIO"
 label_settings = SubResource("LabelSettings_evkk3")
 horizontal_alignment = 1
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+[node name="RichTextLabel3" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
-mouse_filter = 2
+mouse_filter = 1
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_evkk3")
@@ -44,9 +50,9 @@ ipsum dolor sit amet consectetur adipiscing elit rutrum, tempus posuere porttito
 Etiam himenaeos nisi condimentum in nibh euismod turpis, ad ultricies senectus metus vel hendrerit. Pulvinar ante sollicitudin feugiat proin mollis massa lacus id facilisis, elementum varius hac vehicula tristique tortor curae penatibus luctus, cubilia cum tempor nulla gravida pharetra per metus. Volutpat nullam lacus ultricies penatibus placerat, quis sed id sodales, facilisis a dictum tempus."
 fit_content = true
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
-mouse_filter = 2
+mouse_filter = 1
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_evkk3")

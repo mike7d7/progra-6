@@ -70,6 +70,8 @@ script = ExtResource("5_iy58a")
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
 script = ExtResource("5_sky72")
 metadata/_custom_type_script = "uid://cxtfepdg0uqig"
 
