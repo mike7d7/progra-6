@@ -15,10 +15,13 @@ func _init():
 
 func _ready():
 	add_theme_constant_override("separation", CONTAINER_SEPARATION)
-	crear_fila_de_elemento("Documento Importante Alpha")
+	crear_fila_de_elemento("Documento Importante lkjfñlk aslkjas flñksjdafñj sd")
 	crear_fila_de_elemento("Tarea Pendiente #001")
 	crear_fila_de_elemento("Recordatorio Final")
-	crear_fila_de_elemento("Configuración del Sistema X")
+	crear_fila_de_elemento("Configuración")
+	crear_fila_de_elemento("Elemento")
+	crear_fila_de_elemento("Elemento")
+	crear_fila_de_elemento("Elemento")
 
 func crear_fila_de_elemento(texto_del_label: String):
 	var style = preload("res://paginas/rich_text_label_style.tres")
@@ -27,6 +30,7 @@ func crear_fila_de_elemento(texto_del_label: String):
 	panel.name = "PanelFila_" + texto_del_label.replace(" ", "_").substr(0, 20)
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	panel.custom_minimum_size.y = ROW_MIN_HEIGHT
+	panel.mouse_filter = Control.MOUSE_FILTER_PASS
 	panel.add_theme_stylebox_override("panel", style)
 
 	var fila_container = HBoxContainer.new()
@@ -37,6 +41,7 @@ func crear_fila_de_elemento(texto_del_label: String):
 	var label_item = Label.new()
 	label_item.name = "TextoLabel"
 	label_item.text = texto_del_label
+	label_item.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label_item.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	label_item.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label_item.size_flags_horizontal = Control.SIZE_EXPAND_FILL
