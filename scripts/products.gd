@@ -38,22 +38,19 @@ func _ready():
 			print("Error: Node '", label_node_name, "' not found or not a RichTextLabel.")
 
 func _on_erase_received(meta_data, label_name):
-	print("Received signal from VBoxContainer!")
-	print("Meta Data: ", meta_data)
-	print("Label Name: ", label_name)
 	var meta_data_como_string: String = str(meta_data)
-	if label_name == "ItemPanel_Prod_1_" + meta_data_como_string:
-		num_product_1 = meta_data
-	elif label_name == "ItemPanel_Prod_2_" + meta_data_como_string:
-		num_product_2 = meta_data
-	elif label_name == "ItemPanel_Prod_3_" + meta_data_como_string:
-		num_product_3 = meta_data
-	elif label_name == "ItemPanel_Prod_4_" + meta_data_como_string:
-		num_product_4 = meta_data
-	elif label_name == "ItemPanel_Prod_5_" + meta_data_como_string:
-		num_product_5 = meta_data
-	elif label_name == "ItemPanel_Prod_6_" + meta_data_como_string:
-		num_product_6 = meta_data
+	if label_name == "ItemPanel_Prod_1":
+		num_product_1 = 1
+	elif label_name == "ItemPanel_Prod_2":
+		num_product_2 = 1
+	elif label_name == "ItemPanel_Prod_3":
+		num_product_3 = 1
+	elif label_name == "ItemPanel_Prod_4":
+		num_product_4 = 1
+	elif label_name == "ItemPanel_Prod_5":
+		num_product_5 = 1
+	elif label_name == "ItemPanel_Prod_6":
+		num_product_6 = 1
 	else:
 			print("Unrecognized option.")
 

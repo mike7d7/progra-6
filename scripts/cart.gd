@@ -36,27 +36,39 @@ func _on_label_info_received(meta_data, label_name):
 	
 	match label_name:
 		"RichTextLabel1":
-			label_id = "Prod_1_" + str(meta_data)
+			label_id = "Prod_1"
 			label_text = "Ventilador\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel2":
-			label_id = "Prod_2_" + str(meta_data)
+			label_id = "Prod_2"
 			label_text = "Organizador Tipo Lapicero\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel3":
-			label_id = "Prod_3_" + str(meta_data)
+			label_id = "Prod_3"
 			label_text = "Llavero\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel4":
-			label_id = "Prod_4_" + str(meta_data)
+			label_id = "Prod_4"
 			label_text = "Pantalla de Lámpara\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel5":
-			label_id = "Prod_5_" + str(meta_data)
+			label_id = "Prod_5"
 			label_text = "Organizador de Cepillos de Dientes\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel6":
-			label_id = "Prod_6_" + str(meta_data)
+			label_id = "Prod_6"
 			label_text = "Portavasos\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		_:
 			print("Unrecognized option.")
-	if label_text != "":
+
+	if label_text != "" && meta_data == 1:
 		create_item_row(meta_data,label_id,label_text)
+	else:
+		modify_item_row(meta_data,label_id,label_text)
+
+func modify_item_row(meta_payload,label_id: String,label_text: String):
+	var label = get_node_or_null("ItemPanel_" + label_id).get_node_or_null("Row_" + label_id).get_node_or_null("ItemLabel")
+	if label:
+		label.text = label_text
+	else:
+		print("ERROR")
+		
+	
 
 func create_item_row(meta_payload,label_id: String,label_text: String):
 	var style = preload("res://paginas/rich_text_label_style.tres")
@@ -97,7 +109,7 @@ func create_item_row(meta_payload,label_id: String,label_text: String):
 	delete_button_icon.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 	delete_button_icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	delete_button_icon.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	delete_button_icon.pressed.connect(_on_delete_button_pressed.bind(meta_payload,panel))
+	delete_button_icon.pressed.connect(_on_delete_button_pressed.bind(meta_payload, panel))
 
 	row_container.add_child(delete_button_icon)
 
