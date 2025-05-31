@@ -1,4 +1,5 @@
 extends VBoxContainer
+signal label_meta_info_emitted(meta_data, label_name)
 
 const ITEM_FONT_SIZE = 45
 const ROW_MIN_HEIGHT = 45
@@ -18,51 +19,57 @@ func _ready():
 	var emitter_node = get_parent().get_parent().get_node_or_null(path_to_emitter_from_tab)
 
 	if emitter_node:
-		print("Emitter node found: ", emitter_node.get_path())
+		#print("Emitter node found: ", emitter_node.get_path())
 		var error_code = emitter_node.connect("label_meta_info_emitted", Callable(self, "_on_label_info_received"))
-		if error_code == OK:
-			print("Emitter signal connected successfully.")
-		else:
-			print("Failed to connect emitter signal. Code: ", error_code)
+		#if error_code == OK:
+			#print("Emitter signal connected successfully.")
+		#else:
+			#print("Failed to connect emitter signal. Code: ", error_code)
 	else:
 		print("Error: Could not find the emitter node")
 		print("Check that 'catalogo' has a child called 'VBoxContainer' (or whatever its real name is) and that it is the correct node.")
 
 func _on_label_info_received(meta_data, label_name):
-	print("Received signal from VBoxContainer!")
-	print("Meta Data: ", meta_data)
-	print("Label Name: ", label_name)
-	
-	
+	var label_text = ""
+	var label_id = ""
+	var subtotal = 15 * meta_data
 	
 	match label_name:
 		"RichTextLabel1":
-			create_item_row("Ventilador")
+			label_id = "Prod_1_" + str(meta_data)
+			label_text = "Ventilador\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel2":
-			create_item_row("Organizador Tipo Lapicero")
+			label_id = "Prod_2_" + str(meta_data)
+			label_text = "Organizador Tipo Lapicero\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel3":
-			create_item_row("Llavero")
+			label_id = "Prod_3_" + str(meta_data)
+			label_text = "Llavero\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel4":
-			create_item_row("Pantalla de Lámpara")
+			label_id = "Prod_4_" + str(meta_data)
+			label_text = "Pantalla de Lámpara\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel5":
-			create_item_row("Organizador de Cepillos de Dientes")
+			label_id = "Prod_5_" + str(meta_data)
+			label_text = "Organizador de Cepillos de Dientes\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel6":
-			create_item_row("Portavasos")
+			label_id = "Prod_6_" + str(meta_data)
+			label_text = "Portavasos\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		_:
 			print("Unrecognized option.")
+	if label_text != "":
+		create_item_row(meta_data,label_id,label_text)
 
-func create_item_row(label_text: String):
+func create_item_row(meta_payload,label_id: String,label_text: String):
 	var style = preload("res://paginas/rich_text_label_style.tres")
 
 	var panel = PanelContainer.new()
-	panel.name = "ItemPanel_" + label_text.replace(" ", "_").substr(0, 20)
+	panel.name = "ItemPanel_" + label_id
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	panel.custom_minimum_size.y = ROW_MIN_HEIGHT
 	panel.mouse_filter = Control.MOUSE_FILTER_PASS
 	panel.add_theme_stylebox_override("panel", style)
 
 	var row_container = HBoxContainer.new()
-	row_container.name = "Row_" + label_text.replace(" ", "_").substr(0, 20)
+	row_container.name = "Row_" + label_id
 	row_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
 
@@ -90,7 +97,7 @@ func create_item_row(label_text: String):
 	delete_button_icon.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 	delete_button_icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	delete_button_icon.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	delete_button_icon.pressed.connect(_on_delete_button_pressed.bind(panel))
+	delete_button_icon.pressed.connect(_on_delete_button_pressed.bind(meta_payload,panel))
 
 	row_container.add_child(delete_button_icon)
 
@@ -99,5 +106,7 @@ func create_item_row(label_text: String):
 
 	return panel
 
-func _on_delete_button_pressed(row_to_delete: PanelContainer):
+func _on_delete_button_pressed(meta_payload,row_to_delete: PanelContainer):
 	row_to_delete.queue_free()
+	label_meta_info_emitted.emit(meta_payload, row_to_delete.name)
+	print(row_to_delete.name)
