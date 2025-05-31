@@ -51,7 +51,7 @@ theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
 text = "[left][font_size=70]Ventilador[/font_size][/left]
 Un ventilador creado a partir de una botella recortada para las hélices y tapas perforadas que sirven como baleros. Se utiliza hilo y un palito como eje.
-[font_size=70]$15.00 MXN										[url=cart_prod1][color=green][b][/b][/color][/url][/font_size]
+[font_size=70]$15.00 MXN										[url=num_prod_1][color=green][b][/b][/color][/url][/font_size]
 "
 fit_content = true
 

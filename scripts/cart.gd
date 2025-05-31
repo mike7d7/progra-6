@@ -14,91 +14,90 @@ func _init():
 		trash_can_icon_texture = load(TRASH_CAN_ICON_PATH)
 
 func _ready():
-	var path_al_emisor_desde_better_tab_c = "catalogo/VBoxContainer"
-	var nodo_emisor = get_parent().get_parent().get_node_or_null(path_al_emisor_desde_better_tab_c)
+	var path_to_emitter_from_tab = "catalogo/VBoxContainer"
+	var emitter_node = get_parent().get_parent().get_node_or_null(path_to_emitter_from_tab)
 
-	if nodo_emisor:
-		print("Nodo emisor encontrado: ", nodo_emisor.get_path())
-		var error_code = nodo_emisor.connect("label_meta_info_emitted", Callable(self, "_on_label_info_received"))
+	if emitter_node:
+		print("Emitter node found: ", emitter_node.get_path())
+		var error_code = emitter_node.connect("label_meta_info_emitted", Callable(self, "_on_label_info_received"))
 		if error_code == OK:
-			print("Señal del emisor conectada exitosamente.")
+			print("Emitter signal connected successfully.")
 		else:
-			print("Error al conectar la señal del emisor. Código: ", error_code)
+			print("Failed to connect emitter signal. Code: ", error_code)
 	else:
-		print("Error: No se pudo encontrar el nodo emisor")
-		print("Verifica que 'catalogo' tenga un hijo llamado 'VBoxContainer' (o como se llame realmente) y que este sea el nodo correcto.")
-
+		print("Error: Could not find the emitter node")
+		print("Check that 'catalogo' has a child called 'VBoxContainer' (or whatever its real name is) and that it is the correct node.")
 
 func _on_label_info_received(meta_data, label_name):
 	print("Received signal from VBoxContainer!")
 	print("Meta Data: ", meta_data)
 	print("Label Name: ", label_name)
-	#add_theme_constant_override("separation", CONTAINER_SEPARATION)
+	
+	
 	
 	match label_name:
 		"RichTextLabel1":
-			crear_fila_de_elemento("Ventilador")
+			create_item_row("Ventilador")
 		"RichTextLabel2":
-			crear_fila_de_elemento("Organizador Tipo Lapicero")
+			create_item_row("Organizador Tipo Lapicero")
 		"RichTextLabel3":
-			crear_fila_de_elemento("Llavero")
+			create_item_row("Llavero")
 		"RichTextLabel4":
-			crear_fila_de_elemento("Pantalla de Lámpara")
+			create_item_row("Pantalla de Lámpara")
 		"RichTextLabel5":
-			crear_fila_de_elemento("Organizador de Cepillos de Dientes")
+			create_item_row("Organizador de Cepillos de Dientes")
 		"RichTextLabel6":
-			crear_fila_de_elemento("Portavasos")
+			create_item_row("Portavasos")
 		_:
-			print("Opción no reconocida.")
+			print("Unrecognized option.")
 
-
-func crear_fila_de_elemento(texto_del_label: String):
+func create_item_row(label_text: String):
 	var style = preload("res://paginas/rich_text_label_style.tres")
 
 	var panel = PanelContainer.new()
-	panel.name = "PanelFila_" + texto_del_label.replace(" ", "_").substr(0, 20)
+	panel.name = "ItemPanel_" + label_text.replace(" ", "_").substr(0, 20)
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	panel.custom_minimum_size.y = ROW_MIN_HEIGHT
 	panel.mouse_filter = Control.MOUSE_FILTER_PASS
 	panel.add_theme_stylebox_override("panel", style)
 
-	var fila_container = HBoxContainer.new()
-	fila_container.name = "Fila_" + texto_del_label.replace(" ", "_").substr(0, 20)
-	fila_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	fila_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var row_container = HBoxContainer.new()
+	row_container.name = "Row_" + label_text.replace(" ", "_").substr(0, 20)
+	row_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
 
-	var label_item = Label.new()
-	label_item.name = "TextoLabel"
-	label_item.text = texto_del_label
-	label_item.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	label_item.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	label_item.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label_item.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	label_item.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	label_item.add_theme_font_size_override("font_size", ITEM_FONT_SIZE)
-	label_item.add_theme_color_override("font_color", Color.BLACK)
-	fila_container.add_child(label_item)
+	var item_label = Label.new()
+	item_label.name = "ItemLabel"
+	item_label.text = label_text
+	item_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	item_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	item_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	item_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	item_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	item_label.add_theme_font_size_override("font_size", ITEM_FONT_SIZE)
+	item_label.add_theme_color_override("font_color", Color.BLACK)
+	row_container.add_child(item_label)
 
-	var boton_eliminar_icono = TextureButton.new()
-	boton_eliminar_icono.name = "BotonEliminar"
+	var delete_button_icon = TextureButton.new()
+	delete_button_icon.name = "DeleteButton"
 	if trash_can_icon_texture:
-		boton_eliminar_icono.texture_normal = trash_can_icon_texture
+		delete_button_icon.texture_normal = trash_can_icon_texture
 	else:
-		boton_eliminar_icono.text = "X"
+		delete_button_icon.text = "X"
 
-	boton_eliminar_icono.custom_minimum_size = Vector2(ICON_BUTTON_SIZE, ICON_BUTTON_SIZE)
-	boton_eliminar_icono.ignore_texture_size = false
-	boton_eliminar_icono.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
-	boton_eliminar_icono.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	boton_eliminar_icono.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	boton_eliminar_icono.pressed.connect(_on_boton_eliminar_presionado.bind(panel))
+	delete_button_icon.custom_minimum_size = Vector2(ICON_BUTTON_SIZE, ICON_BUTTON_SIZE)
+	delete_button_icon.ignore_texture_size = false
+	delete_button_icon.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	delete_button_icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	delete_button_icon.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	delete_button_icon.pressed.connect(_on_delete_button_pressed.bind(panel))
 
-	fila_container.add_child(boton_eliminar_icono)
+	row_container.add_child(delete_button_icon)
 
-	panel.add_child(fila_container)
+	panel.add_child(row_container)
 	add_child(panel)
 
 	return panel
 
-func _on_boton_eliminar_presionado(fila_a_eliminar: PanelContainer):
-	fila_a_eliminar.queue_free()
+func _on_delete_button_pressed(row_to_delete: PanelContainer):
+	row_to_delete.queue_free()
