@@ -1,6 +1,8 @@
 extends VBoxContainer
 signal label_meta_info_emitted(meta_data, label_name)
 
+const ITEM_FONT_SIZE = 45
+
 var num_product_1 = 1
 var num_product_2 = 1
 var num_product_3 = 1
@@ -96,4 +98,62 @@ func _on_any_label_meta_clicked(url_action, label : RichTextLabel):
 			_:
 				print("Unrecognized option.")
 	if meta_payload:
+		if meta_payload == 1:
+			create_temporal_top_popup("Producto añadido al \ncarrito exitosamente")
+		else:
+			create_temporal_top_popup(str(meta_payload)+" Productos añadidos\nal carrito exitosamente")
 		label_meta_info_emitted.emit(meta_payload, label.name)
+		
+
+func create_temporal_top_popup(txt: String):
+	var existente = get_tree().current_scene.get_node_or_null("WindowPopup")
+	if existente:
+		existente.queue_free()
+
+	if txt.is_empty():
+		print("Warning: create_pop_up called with empty text.")
+		txt = "No se pudo añadir tu \nproducto al carrito"
+
+	var ventana = Window.new()
+	ventana.name = "WindowPopup"
+	ventana.borderless = true
+	ventana.unresizable = true
+	#ventana.transparent_bg = true 
+	ventana.size = Vector2i(512, 128) 
+
+	var vbox = VBoxContainer.new()
+	vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	vbox.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	vbox.set_alignment(VBoxContainer.ALIGNMENT_CENTER)
+	ventana.add_child(vbox)
+
+	var label = Label.new()
+	label.text = txt
+	label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	label.add_theme_font_size_override("font_size", ITEM_FONT_SIZE)
+	label.add_theme_color_override("font_color", Color.BLACK)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	vbox.add_child(label)
+	
+	get_tree().current_scene.add_child(ventana)
+	
+	var screen_size = get_viewport().size
+	var window_size = ventana.size
+	var top_offset = 0 # Pequeño margen desde la parte superior
+	
+	ventana.position = Vector2i(
+		((screen_size.x - window_size.x) + 85) / 2,
+		top_offset
+	)
+	
+	ventana.show()
+
+	var timer = get_tree().create_timer(2.0) # 2.0 segundos
+	timer.timeout.connect(func():
+		if is_instance_valid(ventana): # Asegurarse de que la ventana aún exista
+			ventana.queue_free()
+	)
+	

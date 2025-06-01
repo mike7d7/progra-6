@@ -67,7 +67,6 @@ func _on_label_info_received(meta_data, label_name):
 		modify_item_row(meta_data,label_id,label_text)
 
 func modify_item_row(meta_payload,label_id: String,label_text: String):
-	#print("id:",label_id,"   labeltext:" ,label_text)
 	var item_panel = get_node_or_null("ItemPanel_" + label_id)
 	if item_panel != null:
 		var row_label = item_panel.get_node_or_null("Row_" + label_id)
@@ -75,12 +74,6 @@ func modify_item_row(meta_payload,label_id: String,label_text: String):
 			var label = row_label.get_node_or_null("ItemLabel")
 			if label != null:
 				label.text = label_text
-			else:
-				print("ERROR3")
-		else:
-				print("ERROR2")
-	else:
-				print("ERROR")
 
 func create_item_row(label_id: String,label_text: String):
 	var style = preload("res://paginas/rich_text_label_style.tres")
