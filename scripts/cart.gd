@@ -132,7 +132,7 @@ func create_item_row(label_id: String,label_text: String):
 func create_pop_up(txt: String, callback_on_accept: Callable = Callable()):
 	var existente = get_tree().current_scene.get_node_or_null("WindowPopup")
 	if existente:
-		existente.queue_free()
+		return
 
 	if txt.is_empty():
 		print("Warning: create_pop_up called with empty text.")
