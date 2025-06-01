@@ -129,72 +129,21 @@ func create_item_row(label_id: String,label_text: String):
 
 	return panel
 
-#func create_pop_up(txt: String):
-	#var existente = get_tree().current_scene.get_node_or_null("WindowPopup")
-	#if existente:
-		#return
-	#if txt.is_empty():
-		#print("Warning: create_pop_up called with empty text.")
-		#txt = "[Default Text for Debug]" # Use a placeholder
-	#var ventana = Window.new()
-	#ventana.name = "WindowPopup"
-	#ventana.title = "Modificar Cantidad" # Correct for Window in Godot 4
-	#ventana.size = Vector2i(512, 512) # Use Vector2i for window size; adjust as needed
-	#ventana.add_theme_font_size_override("title_font_size", 24)
-	#ventana.unresizable = true
-	#var margin_container = MarginContainer.new()
-	#margin_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	#margin_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	##margin_container.add_theme_constant_override("margin_right", 10)
-	##margin_container.add_theme_constant_override("margin_left", 10)
-	##margin_container.add_theme_constant_override("margin_top", 10)
-	##margin_container.add_theme_constant_override("margin_bottom", 10)
-	#ventana.add_child(margin_container)
-	#var vbox = VBoxContainer.new()
-	#vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	#vbox.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	#margin_container.add_child(vbox)
-	#var label = Label.new()
-	#label.text = txt
-	#label.autowrap_mode = TextServer.AUTOWRAP_WORD 
-	#label.add_theme_font_size_override("font_size", ITEM_FONT_SIZE)
-	#label.add_theme_color_override("font_color", Color.BLACK)
-	#label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	#label.size_flags_vertical = Control.SIZE_EXPAND_FILL # Make label expand vertically
-	#label.vertical_alignment = VerticalAlignment.VERTICAL_ALIGNMENT_TOP
-	#vbox.add_child(label)
-	#ventana.close_requested.connect(ventana.queue_free)
-	#get_tree().current_scene.add_child(ventana)
-	#ventana.popup_centered() # This makes the window modal, visible, and centered.
-
-# Asumo que ITEM_FONT_SIZE es una constante definida en alguna parte de tu script o autoload
-# const ITEM_FONT_SIZE = 18 # Ejemplo, asegúrate de que esté definida
-
 func create_pop_up(txt: String, callback_on_accept: Callable = Callable()):
 	var existente = get_tree().current_scene.get_node_or_null("WindowPopup")
 	if existente:
-		existente.queue_free() # Opcional: cierra la existente si se llama de nuevo
+		existente.queue_free()
 
 	if txt.is_empty():
 		print("Warning: create_pop_up called with empty text.")
-		txt = "[Default Text for Debug]"
+		txt = "[Sin Productos Seleccionados para modificar]"
 
 	var ventana = Window.new()
 	ventana.name = "WindowPopup"
-	# ventana.title = "Modificar Cantidad" # Ya no es visible con borderless
-	
-	# Hacer la ventana sin bordes y sin capacidad de redimensionar
 	ventana.borderless = true
 	ventana.unresizable = true
-	
-	# Tamaño ajustado para un pop-up (ejemplo, puedes cambiarlo)
 	ventana.size = Vector2i(512, 512) 
-	# Si es borderless, popup_centered() la posicionará.
-	# Para un control más fino o si no usas popup_centered(), podrías necesitar
-	# ajustar su posición manualmente o usar initial_position.
-	# ventana.initial_position = Window.INITIAL_POSITION_CENTER_SCREEN_WITH_MOUSE_FOCUS # o CENTER_SCREEN
 
-	# Contenedor principal con márgenes para dar espacio interno al contenido
 	var root_margin_container = MarginContainer.new()
 	root_margin_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	root_margin_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -204,99 +153,83 @@ func create_pop_up(txt: String, callback_on_accept: Callable = Callable()):
 	root_margin_container.add_theme_constant_override("margin_bottom", 15)
 	ventana.add_child(root_margin_container)
 
-	# VBoxContainer para organizar los elementos verticalmente
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	vbox.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	root_margin_container.add_child(vbox)
 
-	# Etiqueta para el texto informativo
 	var label = Label.new()
 	label.text = txt
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	label.add_theme_font_size_override("font_size", ITEM_FONT_SIZE)
 	label.add_theme_color_override("font_color", Color.BLACK)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	# label.size_flags_vertical = Control.SIZE_EXPAND_FILL # Quitar para que no expanda tanto si hay poco texto
 	vbox.add_child(label)
 
-	# Espaciador
 	var spacer = Control.new()
-	spacer.custom_minimum_size = Vector2(0, 10) # Pequeño espacio
+	spacer.custom_minimum_size = Vector2(0, 10)
 	vbox.add_child(spacer)
 
-	# LineEdit para la entrada numérica
 	var line_edit = LineEdit.new()
 	line_edit.placeholder_text = "Ingresa cantidad"
-	# Para mostrar el teclado numérico en Android/iOS:
 	line_edit.virtual_keyboard_type = LineEdit.KEYBOARD_TYPE_NUMBER
 	line_edit.add_theme_font_size_override("font_size", ITEM_FONT_SIZE)
 	vbox.add_child(line_edit)
 
-	# Espaciador antes de los botones
 	var spacer_buttons = Control.new()
 	spacer_buttons.custom_minimum_size = Vector2(0, 20)
 	vbox.add_child(spacer_buttons)
 
-	# HBoxContainer para los botones
 	var button_hbox = HBoxContainer.new()
 	button_hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	button_hbox.alignment = BoxContainer.ALIGNMENT_CENTER # Centra los botones en el HBox
+	button_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	vbox.add_child(button_hbox)
 
-	# Botón de Cancelar
 	var cancel_button = Button.new()
 	cancel_button.text = "Cancelar"
-	# Estilo para el botón rojo de cancelar
+
 	var cancel_style = StyleBoxFlat.new()
 	cancel_style.bg_color = Color.RED
-	cancel_style.set_content_margin_all(8) # Padding interno del botón
+	cancel_style.set_content_margin_all(8)
 	cancel_button.add_theme_stylebox_override("normal", cancel_style)
-	cancel_button.add_theme_stylebox_override("hover", cancel_style) # Mismo estilo al pasar el mouse
-	cancel_button.add_theme_stylebox_override("pressed", cancel_style) # Mismo estilo al presionar
+	cancel_button.add_theme_stylebox_override("hover", cancel_style)
+	cancel_button.add_theme_stylebox_override("pressed", cancel_style)
 	cancel_button.add_theme_color_override("font_color", Color.WHITE)
 	cancel_button.add_theme_font_size_override("font_size", ITEM_FONT_SIZE)
-
-	cancel_button.pressed.connect(ventana.queue_free) # Cierra la ventana
+	cancel_button.pressed.connect(ventana.queue_free)
 	button_hbox.add_child(cancel_button)
 	
-	# Espacio entre botones
 	var button_spacer = Control.new()
 	button_spacer.custom_minimum_size = Vector2(20,0)
 	button_hbox.add_child(button_spacer)
 
-	# Botón de Aceptar
 	var accept_button = Button.new()
 	accept_button.text = "Aceptar"
 	accept_button.add_theme_font_size_override("font_size", ITEM_FONT_SIZE)
-	# Estilo para el botón de aceptar (opcional, puedes hacerlo similar al de cancelar con otro color)
+
 	var accept_style = StyleBoxFlat.new()
-	accept_style.bg_color = Color.GREEN.darkened(0.2) # Un verde oscuro
+	accept_style.bg_color = Color.GREEN.darkened(0.2)
 	accept_style.set_content_margin_all(8)
 	accept_button.add_theme_stylebox_override("normal", accept_style)
 	accept_button.add_theme_color_override("font_color", Color.WHITE)
 
 	accept_button.pressed.connect(func():
 		var input_value = line_edit.text
-		if input_value.is_valid_float(): # Verifica si es un número válido (entero o decimal)
+		if input_value.is_valid_float():
 			print("Valor aceptado: ", input_value)
 			if callback_on_accept.is_valid():
-				callback_on_accept.call(input_value) # Llama al callback con el valor
+				callback_on_accept.call(input_value)
 		else:
 			print("Entrada no válida: ", input_value)
-	# Aquí podrías, por ejemplo, hacer que el LineEdit parpadee o mostrar un error
-	# Por ahora, no cerramos la ventana si la entrada no es válida.
-	# Si quieres cerrar siempre, quita el 'else' y mueve ventana.queue_free() afuera.
-			return # No cerramos si no es válido y no hay callback, o dejamos que el callback decida.
+			return
 	
-		ventana.queue_free() # Cierra la ventana después de aceptar y llamar al callback
+		ventana.queue_free()
 	)
 	button_hbox.add_child(accept_button)
 
-	# Añadir a la escena y mostrar
 	get_tree().current_scene.add_child(ventana)
 	ventana.popup_centered()
-	line_edit.grab_focus() # Poner el foco en el LineEdit para que el teclado aparezca
+	line_edit.grab_focus()
 
 func _on_modify_button_pressed(panel: PanelContainer):
 	var label = panel.get_child(0).get_child(0)
