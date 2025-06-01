@@ -37,8 +37,7 @@ func _ready():
 		else:
 			print("Error: Node '", label_node_name, "' not found or not a RichTextLabel.")
 
-func _on_erase_received(meta_data, label_name):
-	var meta_data_como_string: String = str(meta_data)
+func _on_erase_received(label_name):
 	if label_name == "ItemPanel_Prod_1":
 		num_product_1 = 1
 	elif label_name == "ItemPanel_Prod_2":
@@ -57,7 +56,6 @@ func _on_erase_received(meta_data, label_name):
 
 func _on_any_label_meta_clicked(url_action, label : RichTextLabel):
 	var meta_payload = null
-	print("Meta clicked: '", url_action, "' in Label: '", label.name, "'")
 	if url_action == "num_prod":
 		match label.name:
 			"RichTextLabel1":
