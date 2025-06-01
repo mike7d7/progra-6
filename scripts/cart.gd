@@ -1,5 +1,6 @@
 extends VBoxContainer
-signal label_meta_info_emitted(meta_data, label_name)
+signal label_meta_info_emitted(label_name)
+signal label_meta_info_emitted_modify(meta_data, label_name)
 
 const ITEM_FONT_SIZE = 45
 const ROW_MIN_HEIGHT = 45
@@ -66,11 +67,20 @@ func _on_label_info_received(meta_data, label_name):
 		modify_item_row(meta_data,label_id,label_text)
 
 func modify_item_row(meta_payload,label_id: String,label_text: String):
-	var label = get_node_or_null("ItemPanel_" + label_id).get_node_or_null("Row_" + label_id).get_node_or_null("ItemLabel")
-	if label:
-		label.text = label_text
+	#print("id:",label_id,"   labeltext:" ,label_text)
+	var item_panel = get_node_or_null("ItemPanel_" + label_id)
+	if item_panel != null:
+		var row_label = item_panel.get_node_or_null("Row_" + label_id)
+		if row_label != null:
+			var label = row_label.get_node_or_null("ItemLabel")
+			if label != null:
+				label.text = label_text
+			else:
+				print("ERROR3")
+		else:
+				print("ERROR2")
 	else:
-		print("ERROR")
+				print("ERROR")
 
 func create_item_row(label_id: String,label_text: String):
 	var style = preload("res://paginas/rich_text_label_style.tres")
@@ -129,7 +139,7 @@ func create_item_row(label_id: String,label_text: String):
 
 	return panel
 
-func create_pop_up(txt: String, callback_on_accept: Callable = Callable()):
+func create_pop_up(txt: String, panel: PanelContainer):
 	var existente = get_tree().current_scene.get_node_or_null("WindowPopup")
 	if existente:
 		return
@@ -217,8 +227,7 @@ func create_pop_up(txt: String, callback_on_accept: Callable = Callable()):
 		var input_value = line_edit.text
 		if input_value.is_valid_float():
 			print("Valor aceptado: ", input_value)
-			if callback_on_accept.is_valid():
-				callback_on_accept.call(input_value)
+			label_meta_info_emitted_modify.emit(int(input_value), panel.name)
 		else:
 			print("Entrada no válida: ", input_value)
 			return
@@ -233,7 +242,7 @@ func create_pop_up(txt: String, callback_on_accept: Callable = Callable()):
 
 func _on_modify_button_pressed(panel: PanelContainer):
 	var label = panel.get_child(0).get_child(0)
-	create_pop_up(label.text)
+	create_pop_up(label.text, panel)
 	#label_meta_info_emitted.emit(5, panel.name)
 
 func _on_delete_button_pressed(row_to_delete: PanelContainer):

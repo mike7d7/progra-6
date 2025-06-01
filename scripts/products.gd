@@ -14,11 +14,8 @@ func _ready():
 
 	if emitter_node:
 		print("Emitter node found: ", emitter_node.get_path())
-		var error_code = emitter_node.connect("label_meta_info_emitted", Callable(self, "_on_erase_received"))
-		if error_code == OK:
-			print("Emitter signal connected successfully.")
-		else:
-			print("Failed to connect emitter signal. Code: ", error_code)
+		emitter_node.connect("label_meta_info_emitted", Callable(self, "_on_erase_received"))
+		emitter_node.connect("label_meta_info_emitted_modify", Callable(self, "_on_modify_received"))
 	else:
 		print("Error: Could not find the emitter node")
 
@@ -29,11 +26,7 @@ func _ready():
 		var current_label = get_node_or_null(label_node_name)
 		if current_label is RichTextLabel: # Verify that the node exists and is a RichTextLabel
 			current_label.bbcode_enabled = true
-			var error_code = current_label.meta_clicked.connect(_on_any_label_meta_clicked.bind(current_label))
-			#if error_code == OK:
-				#print("meta_clicked signal connected successfully for: ", current_label.name)
-			#else:
-				#print("Error connecting meta_clicked for ", current_label.name, ". Code: ", error_code)
+			current_label.meta_clicked.connect(_on_any_label_meta_clicked.bind(current_label))
 		else:
 			print("Error: Node '", label_node_name, "' not found or not a RichTextLabel.")
 
@@ -51,8 +44,32 @@ func _on_erase_received(label_name):
 	elif label_name == "ItemPanel_Prod_6":
 		num_product_6 = 1
 	else:
-			print("Unrecognized option.")
+		print("Unrecognized option.")
 
+func _on_modify_received(meta_data, label_name):
+	var label = null
+	if label_name == "ItemPanel_Prod_1":
+		label = "RichTextLabel1"
+		num_product_1 = meta_data
+	elif label_name == "ItemPanel_Prod_2":
+		label = "RichTextLabel2"
+		num_product_2 = meta_data
+	elif label_name == "ItemPanel_Prod_3":
+		label = "RichTextLabel3"
+		num_product_3 = meta_data
+	elif label_name == "ItemPanel_Prod_4":
+		label = "RichTextLabel4"
+		num_product_4 = meta_data
+	elif label_name == "ItemPanel_Prod_5":
+		label = "RichTextLabel5"
+		num_product_5 = meta_data
+	elif label_name == "ItemPanel_Prod_6":
+		label = "RichTextLabel6"
+		num_product_6 = meta_data
+	else:
+		print("Unrecognized option.")
+	if label != null:
+		label_meta_info_emitted.emit(meta_data, label)
 
 func _on_any_label_meta_clicked(url_action, label : RichTextLabel):
 	var meta_payload = null
