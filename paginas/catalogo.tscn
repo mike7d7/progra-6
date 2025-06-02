@@ -33,7 +33,7 @@ script = ExtResource("1_uic45")
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
-text = "CATALOGO"
+text = "CATÁLOGO"
 label_settings = SubResource("LabelSettings_evkk3")
 horizontal_alignment = 1
 
