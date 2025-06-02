@@ -44,6 +44,7 @@ bbcode_enabled = true
 text = "[center][font_size=90]Objetivo[/font_size][/center]
 El objetivo de esta app es dar a conocer informacion sobre nuestros increibles prototipos desde el precedimiento que realizamos,costos, impacto , dificultades entre otras cosas."
 fit_content = true
+horizontal_alignment = 1
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
@@ -52,8 +53,41 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 40
 theme_override_styles/normal = ExtResource("2_m46t5")
 bbcode_enabled = true
-text = "[center][font_size=90]¿Sabias que?[/font_size][/center] 
-ipsum dolor sit amet consectetur adipiscing elit rutrum, tempus posuere porttitor natoque iaculis tortor nisi augue, sapien nunc proin auctor vitae cubilia condimentum. Ornare primis curae sed eleifend tortor bibendum, viverra morbi himenaeos dictumst cum, aliquam varius habitasse consequat suscipit. Conubia magnis sociis sem pharetra turpis felis phasellus ultrices cum id, est posuere purus quam laoreet rhoncus eget neque nam, commodo sodales volutpat vulputate dictum pulvinar feugiat ultricies nulla.
-
-Etiam himenaeos nisi condimentum in nibh euismod turpis, ad ultricies senectus metus vel hendrerit. Pulvinar ante sollicitudin feugiat proin mollis massa lacus id facilisis, elementum varius hac vehicula tristique tortor curae penatibus luctus, cubilia cum tempor nulla gravida pharetra per metus. Volutpat nullam lacus ultricies penatibus placerat, quis sed id sodales, facilisis a dictum tempus."
+text = "[center][font_size=90]Opinión personal[/font_size][/center]
+En este proceso ciertamente existieron dificultades desde el proceso creativo al técnico
+el cual se intento sobrellevar de la mejor manera en conjunto a todo el equipo lo cual
+considero por mi parte que nos dio una gran oportunidad para la creación e incorporación
+de varias ideas."
 fit_content = true
+horizontal_alignment = 1
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+theme_override_styles/normal = ExtResource("2_m46t5")
+bbcode_enabled = true
+text = "[center][font_size=90]Mejoras a futuro[/font_size][/center]
+Trataría de implementar técnicas que me permitieran una mejor limpieza y eficiencia
+y yo creo que probaría deferentes técnicas con otras herramientas priorizando su
+inversión al igual de tener un mejor plano del proceso."
+fit_content = true
+horizontal_alignment = 1
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+theme_override_styles/normal = ExtResource("2_m46t5")
+bbcode_enabled = true
+text = "[center][font_size=90]Materiales y Técnicas[/font_size][/center]
+[img=800]assets/tapitas.jpg[/img]
+Para este proyecto, reciclamos tapitas de plástico, un material comúnmente desechado, con el fin de transformarlas en productos útiles, creativos y sostenibles. 
+Durante el proceso, aplicamos diversas técnicas y herramientas, como el aplanamiento y corte para lograr el ensamble del material, así como el uso de silicón caliente para asegurar las uniones y evitar fallos durante la elaboración.
+También llevamos a cabo el derretimiento del plástico en horno, lo que nos permitió moldear figuras personalizadas. Tras el moldeo, realizamos el enfriamiento de las piezas y la colocación de hilo para su uso como llaveros.
+Además, se hizo el ensamblaje de tapas y roscas de botellas a un tubo de PVC utilizando
+silicona, lo que permitió la creación de una estructura capaz de portar cepillos."
+fit_content = true
+horizontal_alignment = 1
