@@ -109,7 +109,6 @@ func _on_any_label_meta_clicked(url_action, label : RichTextLabel):
 		else:
 			show_notification(str(meta_payload)+" Productos añadidos \nal carrito exitosamente")
 		label_meta_info_emitted.emit(meta_payload, label.name, false)
-		
 
 func show_notification(message: String):
 	if is_instance_valid(popup):
