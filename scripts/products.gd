@@ -3,6 +3,9 @@ signal label_meta_info_emitted(meta_data, label_name)
 
 const ITEM_FONT_SIZE = 45
 
+var notification_layer: CanvasLayer
+var popup: Panel
+
 var num_product_1 = 1
 var num_product_2 = 1
 var num_product_3 = 1
@@ -31,6 +34,9 @@ func _ready():
 			current_label.meta_clicked.connect(_on_any_label_meta_clicked.bind(current_label))
 		else:
 			print("Error: Node '", label_node_name, "' not found or not a RichTextLabel.")
+	notification_layer = CanvasLayer.new()
+	notification_layer.layer = 100
+	get_tree().root.add_child.call_deferred(notification_layer)
 
 func _on_erase_received(label_name):
 	if label_name == "ItemPanel_Prod_1":
@@ -99,36 +105,46 @@ func _on_any_label_meta_clicked(url_action, label : RichTextLabel):
 				print("Unrecognized option.")
 	if meta_payload:
 		if meta_payload == 1:
-			create_temporal_top_popup("Producto añadido al \ncarrito exitosamente")
+			show_notification("Producto añadido al \ncarrito exitosamente")
 		else:
-			create_temporal_top_popup(str(meta_payload)+" Productos añadidos\nal carrito exitosamente")
+			show_notification(str(meta_payload)+" Productos añadidos \nal carrito exitosamente")
 		label_meta_info_emitted.emit(meta_payload, label.name)
 		
 
-func create_temporal_top_popup(txt: String):
-	var existente = get_tree().current_scene.get_node_or_null("WindowPopup")
-	if existente:
-		existente.queue_free()
+func show_notification(message: String):
+	if is_instance_valid(popup):
+		popup.queue_free()
+	
+	popup = Panel.new()
 
-	if txt.is_empty():
-		print("Warning: create_pop_up called with empty text.")
-		txt = "No se pudo añadir tu \nproducto al carrito"
-
-	var ventana = Window.new()
-	ventana.name = "WindowPopup"
-	ventana.borderless = true
-	ventana.unresizable = true
-	#ventana.transparent_bg = true 
-	ventana.size = Vector2i(512, 128) 
-
-	var vbox = VBoxContainer.new()
-	vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	vbox.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	vbox.set_alignment(VBoxContainer.ALIGNMENT_CENTER)
-	ventana.add_child(vbox)
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color.GREEN.darkened(0.2)
+	style.corner_radius_top_left = 12
+	style.corner_radius_top_right = 12
+	style.corner_radius_bottom_left = 12
+	style.corner_radius_bottom_right = 12
+	style.content_margin_left = 16
+	style.content_margin_right = 16
+	style.content_margin_top = 8
+	style.content_margin_bottom = 8
+	popup.add_theme_stylebox_override("panel", style)
+	
+	popup.anchor_left = 0.1
+	popup.anchor_right = 0.9
+	popup.anchor_top = 0.05
+	popup.anchor_bottom = 0.0
+	popup.offset_top = 5
+	popup.custom_minimum_size = Vector2(0, 160)
+	
+	var container = MarginContainer.new()
+	container.add_theme_constant_override("margin_left", 190)
+	container.add_theme_constant_override("margin_top", 12)
+	container.add_theme_constant_override("margin_bottom", 12)
+	container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	container.size_flags_vertical = Control.SIZE_EXPAND_FILL
 
 	var label = Label.new()
-	label.text = txt
+	label.text = message
 	label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	label.add_theme_font_size_override("font_size", ITEM_FONT_SIZE)
 	label.add_theme_color_override("font_color", Color.BLACK)
@@ -136,24 +152,15 @@ func create_temporal_top_popup(txt: String):
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	vbox.add_child(label)
-	
-	get_tree().current_scene.add_child(ventana)
-	
-	var screen_size = get_viewport().size
-	var window_size = ventana.size
-	var top_offset = 0 # Pequeño margen desde la parte superior
-	
-	ventana.position = Vector2i(
-		((screen_size.x - window_size.x) + 85) / 2,
-		top_offset
-	)
-	
-	ventana.show()
 
-	var timer = get_tree().create_timer(2.0) # 2.0 segundos
-	timer.timeout.connect(func():
-		if is_instance_valid(ventana): # Asegurarse de que la ventana aún exista
-			ventana.queue_free()
-	)
+	container.add_child(label)
+	popup.add_child(container)
+
+	notification_layer.add_child(popup)
 	
+	popup.modulate.a = 0.0
+	var tween = create_tween()
+	tween.tween_property(popup, "modulate:a", 1.0, 0.3)
+	tween.tween_interval(2.0)
+	tween.tween_property(popup, "modulate:a", 0.0, 0.3)
+	tween.tween_callback(Callable(popup, "queue_free"))

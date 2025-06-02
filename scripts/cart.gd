@@ -150,8 +150,8 @@ func create_pop_up(txt: String, panel: PanelContainer):
 	var root_margin_container = MarginContainer.new()
 	root_margin_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	root_margin_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	root_margin_container.add_theme_constant_override("margin_right", 15)
-	root_margin_container.add_theme_constant_override("margin_left", 15)
+	root_margin_container.add_theme_constant_override("margin_right", 5)
+	root_margin_container.add_theme_constant_override("margin_left", 50)
 	root_margin_container.add_theme_constant_override("margin_top", 15)
 	root_margin_container.add_theme_constant_override("margin_bottom", 15)
 	ventana.add_child(root_margin_container)
