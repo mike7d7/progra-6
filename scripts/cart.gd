@@ -1,6 +1,6 @@
 extends VBoxContainer
 signal label_meta_info_emitted(label_name)
-signal label_meta_info_emitted_modify(meta_data, label_name)
+signal label_meta_info_emitted_modify(meta_data, label_name, modified)
 
 const ITEM_FONT_SIZE = 45
 const ROW_MIN_HEIGHT = 45
@@ -12,6 +12,12 @@ const EDIT_ICON_PATH = "res://assets/edit-icon.svg"
 
 var trash_can_icon_texture: Texture2D
 var edit_icon_texture: Texture2D
+
+var buy_label_text = ""
+var buy_label_sum = 0
+var buy_label_count: Array[int] = [0,0,0,0,0,0]
+var total_richtext = null
+
 
 func _init():
 	if ResourceLoader.exists(TRASH_CAN_ICON_PATH):
@@ -33,38 +39,63 @@ func _ready():
 	else:
 		print("Error: Could not find the emitter node")
 		print("Check that 'catalogo' has a child called 'VBoxContainer' (or whatever its real name is) and that it is the correct node.")
+	var vbox2 = get_parent().get_child(0)
+	if vbox2:
+		total_richtext=vbox2.get_child(1).get_child(0)
+	if total_richtext is RichTextLabel:
+		total_richtext.bbcode_enabled = true
+		total_richtext.meta_clicked.connect(_on_buy_meta_clicked.bind(total_richtext))
+	else:
+		print("Error.")
 
-func _on_label_info_received(meta_data, label_name):
+func _on_buy_meta_clicked(url_action, label : RichTextLabel):
+	var txt = "¿Desea confirmar la compra?\nTotal: $" + str(buy_label_sum) + "MXN"
+	if url_action == "buy":
+		create_pop_up(txt, null, 2)
+
+func _on_label_info_received(meta_data, label_name, modified):
+	var subtotal = int(15 * meta_data)
 	var label_text = ""
 	var label_id = ""
-	var subtotal = 15 * meta_data
 	
 	match label_name:
 		"RichTextLabel1":
+			buy_label_count[0] = subtotal
 			label_id = "Prod_1"
 			label_text = "Ventilador\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel2":
+			buy_label_count[1] = subtotal
 			label_id = "Prod_2"
 			label_text = "Organizador Tipo Lapicero\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel3":
+			buy_label_count[2] = subtotal
 			label_id = "Prod_3"
 			label_text = "Llavero\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel4":
+			buy_label_count[3] = subtotal
 			label_id = "Prod_4"
 			label_text = "Pantalla de Lámpara\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel5":
+			buy_label_count[4] = subtotal
 			label_id = "Prod_5"
 			label_text = "Organizador de Cepillos de Dientes\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel6":
+			buy_label_count[5] = subtotal
 			label_id = "Prod_6"
 			label_text = "Portavasos\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		_:
 			print("Unrecognized option.")
 
-	if label_text != "" && meta_data == 1:
+	if label_text != "" && meta_data == 1 && modified == false:
 		create_item_row(label_id,label_text)
 	else:
 		modify_item_row(meta_data,label_id,label_text)
+	
+	buy_label_sum = buy_label_count[0] +buy_label_count[1] +buy_label_count[2] +buy_label_count[3]+buy_label_count[4]+buy_label_count[5]
+	buy_label_text = "[left][font_size=70]Total: $" +str(buy_label_sum)+ " MXN	[url=buy][color=green][b]Comprar[/b][/color][/url][/font_size][/left]"
+	#buy_label_sum = 0
+	if total_richtext:
+		total_richtext.text = buy_label_text
 
 func modify_item_row(meta_payload,label_id: String,label_text: String):
 	var item_panel = get_node_or_null("ItemPanel_" + label_id)
@@ -130,9 +161,7 @@ func create_item_row(label_id: String,label_text: String):
 	panel.add_child(row_container)
 	add_child(panel)
 
-	return panel
-
-func create_pop_up(txt: String, panel: PanelContainer):
+func create_pop_up(txt: String, panel, action):
 	var existente = get_tree().current_scene.get_node_or_null("WindowPopup")
 	if existente:
 		return
@@ -172,12 +201,13 @@ func create_pop_up(txt: String, panel: PanelContainer):
 	var spacer = Control.new()
 	spacer.custom_minimum_size = Vector2(0, 10)
 	vbox.add_child(spacer)
-
-	var line_edit = LineEdit.new()
-	line_edit.placeholder_text = "Ingresa cantidad"
-	line_edit.virtual_keyboard_type = LineEdit.KEYBOARD_TYPE_NUMBER
-	line_edit.add_theme_font_size_override("font_size", ITEM_FONT_SIZE)
-	vbox.add_child(line_edit)
+	var line_edit = null
+	if action == 1: 
+		line_edit =LineEdit.new()
+		line_edit.placeholder_text = "Ingresa cantidad"
+		line_edit.virtual_keyboard_type = LineEdit.KEYBOARD_TYPE_NUMBER
+		line_edit.add_theme_font_size_override("font_size", ITEM_FONT_SIZE)
+		vbox.add_child(line_edit)
 
 	var spacer_buttons = Control.new()
 	spacer_buttons.custom_minimum_size = Vector2(0, 20)
@@ -216,29 +246,57 @@ func create_pop_up(txt: String, panel: PanelContainer):
 	accept_button.add_theme_stylebox_override("normal", accept_style)
 	accept_button.add_theme_color_override("font_color", Color.WHITE)
 
-	accept_button.pressed.connect(func():
-		var input_value = line_edit.text
-		if input_value.is_valid_float():
-			print("Valor aceptado: ", input_value)
-			label_meta_info_emitted_modify.emit(int(input_value), panel.name)
-		else:
-			print("Entrada no válida: ", input_value)
-			return
-	
-		ventana.queue_free()
-	)
+	if action == 1:
+		accept_button.pressed.connect(_btn_accept_modify.bind(line_edit, panel, ventana))
+	elif action == 2:
+		accept_button.pressed.connect(_btn_accept_buy.bind(ventana))
+		print("Compra confirmada")
 	button_hbox.add_child(accept_button)
 
 	get_tree().current_scene.add_child(ventana)
 	ventana.popup_centered()
-	line_edit.grab_focus()
+	if action == 1:
+		line_edit.grab_focus()
+
+func _btn_accept_buy(ventana):
+		
+	ventana.queue_free()
+
+func _btn_accept_modify(line_edit, panel, ventana):
+		var input_value = line_edit.text
+		if input_value.is_valid_float():
+			label_meta_info_emitted_modify.emit(int(input_value), panel.name, true)
+		else:
+			return
+	
+		ventana.queue_free()
 
 func _on_modify_button_pressed(panel: PanelContainer):
 	var label = panel.get_child(0).get_child(0)
-	create_pop_up(label.text, panel)
-	#label_meta_info_emitted.emit(5, panel.name)
+	create_pop_up(label.text, panel, 1)
 
 func _on_delete_button_pressed(row_to_delete: PanelContainer):
+	var label_name = row_to_delete.name
+	print(label_name)
+	if label_name == "ItemPanel_Prod_1":
+		buy_label_count[0] = 0
+	elif label_name == "ItemPanel_Prod_2":
+		buy_label_count[1] = 0
+	elif label_name == "ItemPanel_Prod_3":
+		buy_label_count[2] = 0
+	elif label_name == "ItemPanel_Prod_4":
+		buy_label_count[3] = 0
+	elif label_name == "ItemPanel_Prod_5":
+		buy_label_count[4] = 0
+	elif label_name == "ItemPanel_Prod_6":
+		buy_label_count[5] = 0
+	else:
+		print("Unrecognized option.")
+	buy_label_sum = buy_label_count[0] +buy_label_count[1] +buy_label_count[2] +buy_label_count[3]+buy_label_count[4]+buy_label_count[5]
+	buy_label_text = "[left][font_size=70]Total: $" +str(buy_label_sum)+ " MXN	[url=buy][color=green][b]Comprar[/b][/color][/url][/font_size][/left]"
+	#buy_label_sum = 0
+	if total_richtext:
+		total_richtext.text = buy_label_text
 	row_to_delete.queue_free()
 	var window = get_tree().current_scene.get_node_or_null("WindowPopup")
 	if window != null:

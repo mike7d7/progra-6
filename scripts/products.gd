@@ -1,5 +1,5 @@
 extends VBoxContainer
-signal label_meta_info_emitted(meta_data, label_name)
+signal label_meta_info_emitted(meta_data, label_name, modified)
 
 const ITEM_FONT_SIZE = 45
 
@@ -54,7 +54,7 @@ func _on_erase_received(label_name):
 	else:
 		print("Unrecognized option.")
 
-func _on_modify_received(meta_data, label_name):
+func _on_modify_received(meta_data, label_name, modified):
 	var label = null
 	if label_name == "ItemPanel_Prod_1":
 		label = "RichTextLabel1"
@@ -77,7 +77,7 @@ func _on_modify_received(meta_data, label_name):
 	else:
 		print("Unrecognized option.")
 	if label != null:
-		label_meta_info_emitted.emit(meta_data, label)
+		label_meta_info_emitted.emit(meta_data, label, modified)
 
 func _on_any_label_meta_clicked(url_action, label : RichTextLabel):
 	var meta_payload = null
@@ -108,7 +108,7 @@ func _on_any_label_meta_clicked(url_action, label : RichTextLabel):
 			show_notification("Producto añadido al \ncarrito exitosamente")
 		else:
 			show_notification(str(meta_payload)+" Productos añadidos \nal carrito exitosamente")
-		label_meta_info_emitted.emit(meta_payload, label.name)
+		label_meta_info_emitted.emit(meta_payload, label.name, false)
 		
 
 func show_notification(message: String):
