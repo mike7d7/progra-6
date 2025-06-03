@@ -49,10 +49,9 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 40
 theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
-text = "[left][font_size=70]Ventilador[/font_size][/left]
+text = "[font_size=70][left]Ventilador            $15 MXN[/left][/font_size]
 Un ventilador creado a partir de una botella recortada para las hélices y tapas perforadas que sirven como baleros. Se utiliza hilo y un palito como eje.
-
-[font_size=70]$15.00 MXN										[url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]
+							        		[font_size=70][url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]
 "
 fit_content = true
 meta_underlined = false
@@ -69,9 +68,10 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 40
 theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
-text = "[left][font_size=70]Organizador Tipo Lapicero[/font_size][/left]
+text = "[font_size=70][left]Organizador        $15 MXN[/left][left]Tipo Lapicero[/left][/font_size]
 Un organizador para lápices hecho con tapas, silicón, cartón y fomi. Se crean paredes con las tapas y una base de cartón cubierta con fomi.
-[font_size=70]$15.00 MXN										[url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]"
+							        		[font_size=70][url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]
+"
 fit_content = true
 meta_underlined = false
 
@@ -87,9 +87,10 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 40
 theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
-text = "[left][font_size=70]Llavero[/font_size][/left]
+text = "[font_size=70][left]Llavero                 $15 MXN[/left][/font_size]
 Llaveros hechos fundiendo tapas de plástico. Se reúnen tapas, se colocan entre papel para hornear y se calientan con una plancha para fundirlas y darles forma. Luego se pulen y se les añade el hilo o argolla
-[font_size=70]$15.00 MXN										[url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]"
+							        		[font_size=70][url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]
+"
 fit_content = true
 meta_underlined = false
 
@@ -105,9 +106,10 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 40
 theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
-text = "[left][font_size=70]Pantalla de Lámpara[/font_size][/left]
+text = "[font_size=70][left]Pantalla de           $15 MXN[/left][left]Lámpara[/left][/font_size]
 Una pantalla para lámpara elaborada pegando tapas de plástico siguiendo la forma de un molde. 
-[font_size=70]$15.00 MXN										[url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]"
+							        		[font_size=70][url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]
+"
 fit_content = true
 meta_underlined = false
 
@@ -123,9 +125,10 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 40
 theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
-text = "[left][font_size=70]Organizador de Cepillos de Dientes[/font_size][/left]
+text = "[font_size=70][left]Organizador de  $15 MXN[/left][left]Cepillos de Dientes[/left][/font_size]
 Un organizador para cepillos de dientes hecho con dos bocas de botella, un pedazo de tubo (posiblemente PVC) y 14 tapas. Las bocas de botella se colocan en los extremos del tubo y se pegan tapas perforadas para sostener los cepillos.
-[font_size=70]$15.00 MXN										[url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]"
+ 						        		[font_size=70][url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]
+"
 fit_content = true
 meta_underlined = false
 
@@ -141,8 +144,9 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 40
 theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
-text = "[left][font_size=70]Portavasos[/font_size][/left]
+text = "[font_size=70][left]Portavasos           $15 MXN[/left][/font_size]
 Portavasos creados lavando y secando taparroscas, luego ordenándolas en forma de flor entre papel para hornear y derritiéndolas con una plancha para moldearlas. Finalmente, se endurecen con agua.
-[font_size=70]$15.00 MXN										[url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]"
+							        		[font_size=70][url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]
+"
 fit_content = true
 meta_underlined = false

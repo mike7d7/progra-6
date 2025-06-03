@@ -180,7 +180,26 @@ func create_pop_up(txt: String, panel, action):
 	ventana.name = "WindowPopup"
 	ventana.borderless = true
 	ventana.unresizable = true
-	ventana.size = Vector2i(512, 512) 
+	
+	var label_name
+	if panel:
+		label_name = panel.name
+	var window_size = null
+	if label_name == "ItemPanel_Prod_1":
+		window_size = 480
+	elif label_name == "ItemPanel_Prod_2":
+		window_size = 544
+	elif label_name == "ItemPanel_Prod_3":
+		window_size = 480
+	elif label_name == "ItemPanel_Prod_4":
+		window_size = 544
+	elif label_name == "ItemPanel_Prod_5":
+		window_size = 544
+	elif label_name == "ItemPanel_Prod_6":
+		window_size = 480
+	else:
+		window_size = 364
+	ventana.size = Vector2i(512, window_size)
 
 	var root_margin_container = MarginContainer.new()
 	root_margin_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -256,6 +275,7 @@ func create_pop_up(txt: String, panel, action):
 		accept_button.pressed.connect(_btn_accept_modify.bind(line_edit, panel, ventana))
 	elif action == 2:
 		accept_button.pressed.connect(_btn_accept_buy.bind(ventana))
+		
 	button_hbox.add_child(accept_button)
 
 	get_tree().current_scene.add_child(ventana)
@@ -264,7 +284,7 @@ func create_pop_up(txt: String, panel, action):
 		line_edit.grab_focus()
 
 func _btn_accept_buy(ventana):
-	show_notification("¡Compra Realizada Correctamente!")	
+	show_notification("¡Compra Realizada Correctamente!", true)	
 	ventana.queue_free()
 	
 
@@ -277,8 +297,11 @@ func _on_popup_hidden_then_change_scene():
 
 func _btn_accept_modify(line_edit, panel, ventana):
 		var input_value = line_edit.text
-		if input_value.is_valid_float():
-			label_meta_info_emitted_modify.emit(int(input_value), panel.name, true)
+		if input_value.is_valid_int():
+			if int(input_value) > 0:
+				label_meta_info_emitted_modify.emit(int(input_value), panel.name, true)
+			else:
+				show_notification("               Entrada invalida", false)
 		else:
 			return
 	
@@ -290,7 +313,6 @@ func _on_modify_button_pressed(panel: PanelContainer):
 
 func _on_delete_button_pressed(row_to_delete: PanelContainer):
 	var label_name = row_to_delete.name
-	print(label_name)
 	if label_name == "ItemPanel_Prod_1":
 		buy_label_count[0] = 0
 	elif label_name == "ItemPanel_Prod_2":
@@ -316,7 +338,7 @@ func _on_delete_button_pressed(row_to_delete: PanelContainer):
 		window.queue_free()
 	label_meta_info_emitted.emit(row_to_delete.name)
 
-func show_notification(message: String):
+func show_notification(message: String, reset):
 	if is_instance_valid(popup):
 		popup.queue_free()
 	
@@ -366,6 +388,7 @@ func show_notification(message: String):
 	popup.modulate.a = 0.0
 	var tween = create_tween()
 	tween.tween_property(popup, "modulate:a", 1.0, 0.3)
-	tween.tween_interval(2.0)
+	tween.tween_interval(1.0)
 	tween.tween_property(popup, "modulate:a", 0.0, 0.3)
-	tween.tween_callback(_on_popup_hidden_then_change_scene)
+	if reset:
+		tween.tween_callback(_on_popup_hidden_then_change_scene)
