@@ -14,7 +14,7 @@ var num_product_5 = 1
 var num_product_6 = 1
 
 func _ready():
-	var path_to_emitter_from_tab = "carrito/VBoxContainer"
+	var path_to_emitter_from_tab = "%carrito" + "/VBoxContainer"
 	var emitter_node = get_parent().get_parent().get_node_or_null(path_to_emitter_from_tab)
 
 	if emitter_node:

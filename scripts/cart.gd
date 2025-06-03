@@ -29,7 +29,7 @@ func _init():
 		edit_icon_texture = load(EDIT_ICON_PATH)
 
 func _ready():
-	var path_to_emitter_from_tab = "catalogo/VBoxContainer"
+	var path_to_emitter_from_tab = "%catalogo" + "/VBoxContainer"
 	var emitter_node = get_parent().get_parent().get_node_or_null(path_to_emitter_from_tab)
 
 	if emitter_node:

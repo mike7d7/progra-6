@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cfujo3d5gw2lc"]
+[gd_scene load_steps=20 format=3 uid="uid://cfujo3d5gw2lc"]
 
 [ext_resource type="Texture2D" uid="uid://bpjetuk43nimm" path="res://assets/catalog-svgrepo-com.svg" id="1_kbped"]
 [ext_resource type="Texture2D" uid="uid://bpwyvpi2hh4pt" path="res://assets/home-svgrepo-com.svg" id="2_fj5cn"]
@@ -39,6 +39,13 @@ border_width_right = 30
 border_width_bottom = 30
 border_color = Color(0.8, 0.8, 0.8, 0)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knq72"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 30
+border_width_right = 30
+border_width_bottom = 30
+border_color = Color(1, 1, 1, 1)
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -73,12 +80,7 @@ tab_2/icon = ExtResource("3_iy58a")
 tab_3/icon = ExtResource("4_6a6wx")
 script = ExtResource("5_iy58a")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_g31lc")
-
-[node name="BetterTabContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer"]
+[node name="BetterTabContainer" type="ScrollContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -87,16 +89,38 @@ vertical_scroll_mode = 3
 script = ExtResource("5_sky72")
 metadata/_custom_type_script = "uid://cxtfepdg0uqig"
 
-[node name="catalogo" parent="VBoxContainer/PanelContainer/BetterTabContainer" instance=ExtResource("8_6a6wx")]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/BetterTabContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_g31lc")
+
+[node name="catalogo" parent="VBoxContainer/BetterTabContainer/PanelContainer" instance=ExtResource("8_6a6wx")]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="inicio" parent="VBoxContainer/PanelContainer/BetterTabContainer" instance=ExtResource("6_fj5cn")]
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/BetterTabContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_g31lc")
+
+[node name="inicio" parent="VBoxContainer/BetterTabContainer/PanelContainer3" instance=ExtResource("6_fj5cn")]
 layout_mode = 2
 
-[node name="catalogo2" parent="VBoxContainer/PanelContainer/BetterTabContainer" instance=ExtResource("9_0ytqx")]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/BetterTabContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_knq72")
+
+[node name="contacto" parent="VBoxContainer/BetterTabContainer/PanelContainer2" instance=ExtResource("9_0ytqx")]
 layout_mode = 2
 
-[node name="carrito" parent="VBoxContainer/PanelContainer/BetterTabContainer" instance=ExtResource("10_pxugv")]
+[node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer/BetterTabContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_g31lc")
+
+[node name="carrito" parent="VBoxContainer/BetterTabContainer/PanelContainer4" instance=ExtResource("10_pxugv")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [connection signal="tab_clicked" from="VBoxContainer/TabBar" to="VBoxContainer/TabBar" method="_on_tab_clicked"]
