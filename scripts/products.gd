@@ -1,5 +1,5 @@
 extends VBoxContainer
-signal label_meta_info_emitted(meta_data, label_name, modified)
+signal label_meta_info_emitted(description,meta_data, label_name, modified)
 
 const ITEM_FONT_SIZE = 45
 
@@ -12,6 +12,7 @@ var num_product_3 = 1
 var num_product_4 = 1
 var num_product_5 = 1
 var num_product_6 = 1
+var description = null
 
 func _ready():
 	var path_to_emitter_from_tab = "%carrito" + "/VBoxContainer"
@@ -77,7 +78,7 @@ func _on_modify_received(meta_data, label_name, modified):
 	else:
 		print("Unrecognized option.")
 	if label != null:
-		label_meta_info_emitted.emit(meta_data, label, modified)
+		label_meta_info_emitted.emit(description,meta_data, label, modified)
 
 func _on_any_label_meta_clicked(url_action, label : RichTextLabel):
 	var meta_payload = null
@@ -86,21 +87,27 @@ func _on_any_label_meta_clicked(url_action, label : RichTextLabel):
 			"RichTextLabel1":
 				meta_payload = num_product_1
 				num_product_1+=1
+				description = "Un ventilador creado a partir de una botella recortada para las hélices y tapas perforadas que sirven como baleros. Se utiliza hilo y un palito como eje."
 			"RichTextLabel2":
 				meta_payload = num_product_2
 				num_product_2+=1
+				description = "Un organizador para lápices hecho con tapas, silicón, cartón y fomi. Se crean paredes con las tapas y una base de cartón cubierta con fomi."
 			"RichTextLabel3":
 				meta_payload = num_product_3
 				num_product_3+=1
+				description = "Llaveros hechos fundiendo tapas de plástico. Se reúnen tapas, se colocan entre papel para hornear y se calientan con una plancha para fundirlas y darles forma. Luego se pulen y se les añade el hilo o argolla."
 			"RichTextLabel4":
 				meta_payload = num_product_4
 				num_product_4+=1
+				description = "Una pantalla para lámpara elaborada pegando tapas de plástico siguiendo la forma de un molde. "
 			"RichTextLabel5":
 				meta_payload = num_product_5
 				num_product_5+=1
+				description = "Un organizador para cepillos de dientes hecho con dos bocas de botella, un pedazo de tubo (posiblemente PVC) y 14 tapas. Las bocas de botella se colocan en los extremos del tubo y se pegan tapas perforadas para sostener los cepillos."
 			"RichTextLabel6":
 				meta_payload = num_product_6
 				num_product_6+=1
+				description = "Portavasos creados lavando y secando taparroscas, luego ordenándolas en forma de flor entre papel para hornear y derritiéndolas con una plancha para moldearlas. Finalmente, se endurecen con agua."
 			_:
 				print("Unrecognized option.")
 	if meta_payload:
@@ -108,7 +115,7 @@ func _on_any_label_meta_clicked(url_action, label : RichTextLabel):
 			show_notification("Producto añadido al \ncarrito exitosamente")
 		else:
 			show_notification(str(meta_payload)+" Productos añadidos \nal carrito exitosamente")
-		label_meta_info_emitted.emit(meta_payload, label.name, false)
+		label_meta_info_emitted.emit(description,meta_payload, label.name, false)
 
 func show_notification(message: String):
 	if is_instance_valid(popup):

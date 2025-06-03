@@ -59,43 +59,57 @@ func _on_buy_meta_clicked(url_action, label : RichTextLabel):
 	if url_action == "buy":
 		create_pop_up(txt, null, 2)
 
-func _on_label_info_received(meta_data, label_name, modified):
+func _on_label_info_received(description,meta_data, label_name, modified):
 	var subtotal = int(15 * meta_data)
 	var label_text = ""
 	var label_id = ""
+	var label_text_modify = ""
+	var img_path = ""
 	
 	match label_name:
 		"RichTextLabel1":
+			img_path = "res://assets/prod1.png"
 			buy_label_count[0] = subtotal
 			label_id = "Prod_1"
-			label_text = "Ventilador\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
+			label_text = "Ventilador\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN \nDescripción: " + description
+			label_text_modify = "Ventilador\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel2":
+			img_path = "res://assets/prod2.png"
 			buy_label_count[1] = subtotal
 			label_id = "Prod_2"
-			label_text = "Organizador Tipo Lapicero\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
+			label_text = "Organizador Tipo Lapicero\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN \nDescripción: " + description
+			label_text_modify = "Organizador Tipo Lapicero\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel3":
+			img_path = "res://assets/prod3.png"
 			buy_label_count[2] = subtotal
 			label_id = "Prod_3"
-			label_text = "Llavero\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
+			label_text = "Llavero\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN \nDescripción: " + description
+			label_text_modify = "Llavero\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel4":
+			img_path = "res://assets/prod4.png"
 			buy_label_count[3] = subtotal
 			label_id = "Prod_4"
-			label_text = "Pantalla de Lámpara\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
+			label_text = "Pantalla de Lámpara\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN \nDescripción: " + description
+			label_text_modify = "Pantalla de Lámpara\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel5":
+			img_path = "res://assets/prod5.png"
 			buy_label_count[4] = subtotal
 			label_id = "Prod_5"
-			label_text = "Organizador de Cepillos de Dientes\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
+			label_text = "Organizador de Cepillos de Dientes\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN \nDescripción: " + description
+			label_text_modify = "Organizador de Cepillos de Dientes\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		"RichTextLabel6":
+			img_path = "res://assets/prod6.png"
 			buy_label_count[5] = subtotal
 			label_id = "Prod_6"
-			label_text = "Portavasos\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
+			label_text = "Portavasos\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN \nDescripción: " + description
+			label_text_modify = "Portavasos\nCantidad: " + str(meta_data) + "\nSubtotal: $" + str(subtotal) + " MXN "
 		_:
 			print("Unrecognized option.")
 
 	if label_text != "" && meta_data == 1 && modified == false:
-		create_item_row(label_id,label_text)
+		create_item_row(label_id,label_text, label_text_modify, img_path)
 	else:
-		modify_item_row(meta_data,label_id,label_text)
+		modify_item_row(meta_data,label_id,label_text, label_text_modify)
 	
 	buy_label_sum = buy_label_count[0] +buy_label_count[1] +buy_label_count[2] +buy_label_count[3]+buy_label_count[4]+buy_label_count[5]
 	buy_label_text = "[left][font_size=70]Total: $" +str(buy_label_sum)+ " MXN	[url=buy][color=green][b]Comprar[/b][/color][/url][/font_size][/left]"
@@ -103,7 +117,7 @@ func _on_label_info_received(meta_data, label_name, modified):
 	if total_richtext:
 		total_richtext.text = buy_label_text
 
-func modify_item_row(meta_payload,label_id: String,label_text: String):
+func modify_item_row(meta_payload,label_id: String,label_text: String, label_text_modify):
 	var item_panel = get_node_or_null("ItemPanel_" + label_id)
 	if item_panel != null:
 		var row_label = item_panel.get_node_or_null("Row_" + label_id)
@@ -112,7 +126,7 @@ func modify_item_row(meta_payload,label_id: String,label_text: String):
 			if label != null:
 				label.text = label_text
 
-func create_item_row(label_id: String,label_text: String):
+func create_item_row(label_id: String,label_text: String,label_text_modify: String, img_path):
 	var style = preload("res://paginas/rich_text_label_style.tres")
 
 	var panel = PanelContainer.new()
@@ -126,6 +140,12 @@ func create_item_row(label_id: String,label_text: String):
 	row_container.name = "Row_" + label_id
 	row_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	
+	var image_texture = load(img_path)  # Load your image
+	
+	var texture_rect = TextureRect.new()
+	texture_rect.texture = image_texture
+	panel.add_child(texture_rect)
 
 	var item_label = Label.new()
 	item_label.name = "ItemLabel"
@@ -136,7 +156,7 @@ func create_item_row(label_id: String,label_text: String):
 	item_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	item_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	item_label.add_theme_font_size_override("font_size", ITEM_FONT_SIZE)
-	item_label.add_theme_color_override("font_color", Color.BLACK)
+	item_label.add_theme_color_override("font_color", Color.WHITE)
 	row_container.add_child(item_label)
 
 	var delete_button_icon = TextureButton.new()
@@ -159,7 +179,7 @@ func create_item_row(label_id: String,label_text: String):
 	modify_button_icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	modify_button_icon.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	modify_button_icon.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	modify_button_icon.pressed.connect(_on_modify_button_pressed.bind(panel))
+	modify_button_icon.pressed.connect(_on_modify_button_pressed.bind(label_text_modify,panel))
 
 	row_container.add_child(modify_button_icon)
 	row_container.add_child(delete_button_icon)
@@ -307,9 +327,8 @@ func _btn_accept_modify(line_edit, panel, ventana):
 	
 		ventana.queue_free()
 
-func _on_modify_button_pressed(panel: PanelContainer):
-	var label = panel.get_child(0).get_child(0)
-	create_pop_up(label.text, panel, 1)
+func _on_modify_button_pressed(label, panel: PanelContainer):
+	create_pop_up(label, panel, 1)
 
 func _on_delete_button_pressed(row_to_delete: PanelContainer):
 	var label_name = row_to_delete.name

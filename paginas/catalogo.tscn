@@ -88,7 +88,7 @@ theme_override_font_sizes/normal_font_size = 40
 theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
 text = "[font_size=70][left]Llavero                 $15 MXN[/left][/font_size]
-Llaveros hechos fundiendo tapas de plástico. Se reúnen tapas, se colocan entre papel para hornear y se calientan con una plancha para fundirlas y darles forma. Luego se pulen y se les añade el hilo o argolla
+Llaveros hechos fundiendo tapas de plástico. Se reúnen tapas, se colocan entre papel para hornear y se calientan con una plancha para fundirlas y darles forma. Luego se pulen y se les añade el hilo o argolla.
 							        		[font_size=70][url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]
 "
 fit_content = true
