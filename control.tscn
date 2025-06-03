@@ -74,8 +74,8 @@ theme_override_styles/tab_focus = SubResource("StyleBoxFlat_eh0v1")
 current_tab = 0
 tab_alignment = 1
 tab_count = 4
-tab_0/icon = ExtResource("1_kbped")
-tab_1/icon = ExtResource("2_fj5cn")
+tab_0/icon = ExtResource("2_fj5cn")
+tab_1/icon = ExtResource("1_kbped")
 tab_2/icon = ExtResource("3_iy58a")
 tab_3/icon = ExtResource("4_6a6wx")
 script = ExtResource("5_iy58a")
@@ -89,6 +89,14 @@ vertical_scroll_mode = 3
 script = ExtResource("5_sky72")
 metadata/_custom_type_script = "uid://cxtfepdg0uqig"
 
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/BetterTabContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_g31lc")
+
+[node name="inicio" parent="VBoxContainer/BetterTabContainer/PanelContainer3" instance=ExtResource("6_fj5cn")]
+layout_mode = 2
+
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/BetterTabContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -96,14 +104,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_g31lc")
 
 [node name="catalogo" parent="VBoxContainer/BetterTabContainer/PanelContainer" instance=ExtResource("8_6a6wx")]
 unique_name_in_owner = true
-layout_mode = 2
-
-[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/BetterTabContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_g31lc")
-
-[node name="inicio" parent="VBoxContainer/BetterTabContainer/PanelContainer3" instance=ExtResource("6_fj5cn")]
 layout_mode = 2
 
 [node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/BetterTabContainer"]
