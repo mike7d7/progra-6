@@ -1,28 +1,120 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcrtd2kbx7vnw"]
+[gd_scene load_steps=5 format=3 uid="uid://ctrxloqa2yikb"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_2nsbc"]
+[ext_resource type="StyleBox" uid="uid://cjnanqucqkqjb" path="res://paginas/rich_text_label_style_contacto.tres" id="1_tdpob"]
+[ext_resource type="Script" uid="uid://bg81ev0wf03q1" path="res://paginas/contacto_url.gd" id="2_tdpob"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tkt37"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_evkk3"]
 font_size = 120
 font_color = Color(0.27451, 0.858824, 0.160784, 1)
 
-[node name="Control" type="VBoxContainer"]
+[node name="catalogo" type="ScrollContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 1051.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tkt37")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 60
 
-[node name="Label2" type="Label" parent="."]
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 text = "CONTACTO"
-label_settings = SubResource("LabelSettings_2nsbc")
+label_settings = SubResource("LabelSettings_evkk3")
 horizontal_alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+[node name="RichTextLabel4" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Lorem ipsum dolor sit amet consectetur adipiscing elit rutrum, tempus posuere porttitor natoque iaculis tortor nisi augue, sapien nunc proin auctor vitae cubilia condimentum. Ornare primis curae sed eleifend tortor bibendum, viverra morbi himenaeos dictumst cum, aliquam varius habitasse consequat suscipit. Conubia magnis sociis sem pharetra turpis felis phasellus ultrices cum id, est posuere purus quam laoreet rhoncus eget neque nam, commodo sodales volutpat vulputate dictum pulvinar feugiat ultricies nulla.
-
-Etiam himenaeos nisi condimentum in nibh euismod turpis, ad ultricies senectus metus vel hendrerit. Pulvinar ante sollicitudin feugiat proin mollis massa lacus id facilisis, elementum varius hac vehicula tristique tortor curae penatibus luctus, cubilia cum tempor nulla gravida pharetra per metus. Volutpat nullam lacus ultricies penatibus placerat, quis sed id sodales, facilisis a dictum tempus."
+theme_override_font_sizes/normal_font_size = 40
+theme_override_styles/normal = ExtResource("1_tdpob")
+bbcode_enabled = true
+text = "[center][font_size=90]Ventilador[/font_size][/center]
+[url]+52 442 551 0256[/url]"
 fit_content = true
+horizontal_alignment = 1
+script = ExtResource("2_tdpob")
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+theme_override_styles/normal = ExtResource("1_tdpob")
+bbcode_enabled = true
+text = "[center][font_size=90]Organizador Tipo Lapicero[/font_size][/center]
+[url]+52 442 551 0256[/url]"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("2_tdpob")
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+theme_override_styles/normal = ExtResource("1_tdpob")
+bbcode_enabled = true
+text = "[center][font_size=90]Llavero[/font_size][/center]
+[url]+52 442 551 0256[/url]"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("2_tdpob")
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+theme_override_styles/normal = ExtResource("1_tdpob")
+bbcode_enabled = true
+text = "[center][font_size=90]Pantalla de Lámpara[/font_size][/center]
+[url]+52 442 551 0256[/url]"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("2_tdpob")
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+theme_override_styles/normal = ExtResource("1_tdpob")
+bbcode_enabled = true
+text = "[center][font_size=90]Organizador de Cepillos de Dientes[/font_size][/center]
+[url]+52 442 551 0256[/url]"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("2_tdpob")
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+theme_override_styles/normal = ExtResource("1_tdpob")
+bbcode_enabled = true
+text = "[center][font_size=90]Portavasos[/font_size][/center]
+[url]+52 442 551 0256[/url]"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("2_tdpob")
+
+[connection signal="meta_clicked" from="VBoxContainer/RichTextLabel4" to="VBoxContainer/RichTextLabel4" method="_richtextlabel_on_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/RichTextLabel3" to="VBoxContainer/RichTextLabel3" method="_richtextlabel_on_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/RichTextLabel5" to="VBoxContainer/RichTextLabel5" method="_richtextlabel_on_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/RichTextLabel6" to="VBoxContainer/RichTextLabel6" method="_richtextlabel_on_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/RichTextLabel7" to="VBoxContainer/RichTextLabel7" method="_richtextlabel_on_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/RichTextLabel8" to="VBoxContainer/RichTextLabel8" method="_richtextlabel_on_meta_clicked"]

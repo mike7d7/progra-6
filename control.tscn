@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://cxtfepdg0uqig" path="res://addons/BetterTabContainer/BetterTabContainer.gd" id="5_sky72"]
 [ext_resource type="PackedScene" uid="uid://c8kbpwpto362f" path="res://paginas/inicio.tscn" id="6_fj5cn"]
 [ext_resource type="PackedScene" uid="uid://citg1pgt1wybe" path="res://paginas/catalogo.tscn" id="8_6a6wx"]
-[ext_resource type="PackedScene" uid="uid://bcrtd2kbx7vnw" path="res://paginas/contacto.tscn" id="9_0ytqx"]
+[ext_resource type="PackedScene" uid="uid://ctrxloqa2yikb" path="res://paginas/contacto.tscn" id="9_0ytqx"]
 [ext_resource type="PackedScene" uid="uid://bti36ntuvjkb6" path="res://paginas/carrito.tscn" id="10_pxugv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6a6wx"]
@@ -93,7 +93,7 @@ layout_mode = 2
 [node name="inicio" parent="VBoxContainer/PanelContainer/BetterTabContainer" instance=ExtResource("6_fj5cn")]
 layout_mode = 2
 
-[node name="contacto" parent="VBoxContainer/PanelContainer/BetterTabContainer" instance=ExtResource("9_0ytqx")]
+[node name="catalogo2" parent="VBoxContainer/PanelContainer/BetterTabContainer" instance=ExtResource("9_0ytqx")]
 layout_mode = 2
 
 [node name="carrito" parent="VBoxContainer/PanelContainer/BetterTabContainer" instance=ExtResource("10_pxugv")]
