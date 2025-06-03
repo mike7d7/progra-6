@@ -256,7 +256,6 @@ func create_pop_up(txt: String, panel, action):
 		accept_button.pressed.connect(_btn_accept_modify.bind(line_edit, panel, ventana))
 	elif action == 2:
 		accept_button.pressed.connect(_btn_accept_buy.bind(ventana))
-		print("Compra confirmada")
 	button_hbox.add_child(accept_button)
 
 	get_tree().current_scene.add_child(ventana)
@@ -267,6 +266,14 @@ func create_pop_up(txt: String, panel, action):
 func _btn_accept_buy(ventana):
 	show_notification("¡Compra Realizada Correctamente!")	
 	ventana.queue_free()
+	
+
+func _on_popup_hidden_then_change_scene():
+	if is_instance_valid(popup):
+		popup.queue_free()
+		var err = get_tree().change_scene_to_file("res://control.tscn")
+		if err != OK:
+			print("Error al intentar reiniciar la escena: ", err)
 
 func _btn_accept_modify(line_edit, panel, ventana):
 		var input_value = line_edit.text
@@ -361,4 +368,4 @@ func show_notification(message: String):
 	tween.tween_property(popup, "modulate:a", 1.0, 0.3)
 	tween.tween_interval(2.0)
 	tween.tween_property(popup, "modulate:a", 0.0, 0.3)
-	tween.tween_callback(Callable(popup, "queue_free"))
+	tween.tween_callback(_on_popup_hidden_then_change_scene)
