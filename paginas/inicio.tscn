@@ -91,3 +91,49 @@ Además, se hizo el ensamblaje de tapas y roscas de botellas a un tubo de PVC ut
 silicona, lo que permitió la creación de una estructura capaz de portar cepillos."
 fit_content = true
 horizontal_alignment = 1
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+theme_override_styles/normal = ExtResource("2_m46t5")
+bbcode_enabled = true
+text = "[center][font_size=90]Residuos Utilizados[/font_size][/center]
+Organizador (Lapiceros):  
+40-50 tapas  
+
+Pantalla para lámpara:  
+70 tapas  
+
+Portavasos:  
+7 tapas  
+
+Porta cepillo de dientes:  
+14 tapas  
+1 tubo de PVC (10 cm)  
+2 taparroscas  
+
+Ventilador manual:  
+2 tapas  
+1 palo  
+Hilo  
+Botella de plástico  
+
+Llaveros:  
+4 tapas  
+1 argolla"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+theme_override_styles/normal = ExtResource("2_m46t5")
+bbcode_enabled = true
+text = "[center][font_size=90]Impacto del Reciclaje[/font_size][/center]
+El reciclaje es una poderosa herramienta para cuidar nuestro planeta. Al reutilizar materiales como plásticos, vidrio o papel, reducimos la cantidad de residuos que terminan en vertederos y océanos, disminuyendo la contaminación ambiental. Además, el reciclaje ayuda a conservar recursos naturales, ahorra energía y reduce las emisiones de gases de efecto invernadero. Pequeñas acciones, como transformar tapas de botellas en organizadores o portavasos, demuestran que cada gesto cuenta. Si todos contribuimos, podemos construir un futuro más sostenible y proteger el medio ambiente para las próximas generaciones."
+fit_content = true
+horizontal_alignment = 1
