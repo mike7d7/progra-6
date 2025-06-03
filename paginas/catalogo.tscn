@@ -51,9 +51,11 @@ theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
 text = "[left][font_size=70]Ventilador[/font_size][/left]
 Un ventilador creado a partir de una botella recortada para las hélices y tapas perforadas que sirven como baleros. Se utiliza hilo y un palito como eje.
-[font_size=70]$15.00 MXN										[url=num_prod][b]🛒[/b][/url][/font_size]
+
+[font_size=70]$15.00 MXN										[url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]
 "
 fit_content = true
+meta_underlined = false
 
 [node name="TextureRect2" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
@@ -69,8 +71,9 @@ theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
 text = "[left][font_size=70]Organizador Tipo Lapicero[/font_size][/left]
 Un organizador para lápices hecho con tapas, silicón, cartón y fomi. Se crean paredes con las tapas y una base de cartón cubierta con fomi.
-[font_size=70]$15.00 MXN										[url=num_prod][b]🛒[/b][/url][/font_size]"
+[font_size=70]$15.00 MXN										[url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]"
 fit_content = true
+meta_underlined = false
 
 [node name="TextureRect3" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
@@ -86,8 +89,9 @@ theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
 text = "[left][font_size=70]Llavero[/font_size][/left]
 Llaveros hechos fundiendo tapas de plástico. Se reúnen tapas, se colocan entre papel para hornear y se calientan con una plancha para fundirlas y darles forma. Luego se pulen y se les añade el hilo o argolla
-[font_size=70]$15.00 MXN										[url=num_prod][b]🛒[/b][/url][/font_size]"
+[font_size=70]$15.00 MXN										[url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]"
 fit_content = true
+meta_underlined = false
 
 [node name="TextureRect4" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
@@ -103,8 +107,9 @@ theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
 text = "[left][font_size=70]Pantalla de Lámpara[/font_size][/left]
 Una pantalla para lámpara elaborada pegando tapas de plástico siguiendo la forma de un molde. 
-[font_size=70]$15.00 MXN										[url=num_prod][b]🛒[/b][/url][/font_size]"
+[font_size=70]$15.00 MXN										[url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]"
 fit_content = true
+meta_underlined = false
 
 [node name="TextureRect5" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
@@ -120,8 +125,9 @@ theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
 text = "[left][font_size=70]Organizador de Cepillos de Dientes[/font_size][/left]
 Un organizador para cepillos de dientes hecho con dos bocas de botella, un pedazo de tubo (posiblemente PVC) y 14 tapas. Las bocas de botella se colocan en los extremos del tubo y se pegan tapas perforadas para sostener los cepillos.
-[font_size=70]$15.00 MXN										[url=num_prod][b]🛒[/b][/url][/font_size]"
+[font_size=70]$15.00 MXN										[url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]"
 fit_content = true
+meta_underlined = false
 
 [node name="TextureRect6" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
@@ -137,5 +143,6 @@ theme_override_styles/normal = ExtResource("2_vanq4")
 bbcode_enabled = true
 text = "[left][font_size=70]Portavasos[/font_size][/left]
 Portavasos creados lavando y secando taparroscas, luego ordenándolas en forma de flor entre papel para hornear y derritiéndolas con una plancha para moldearlas. Finalmente, se endurecen con agua.
-[font_size=70]$15.00 MXN										[url=num_prod][b]🛒[/b][/url][/font_size]"
+[font_size=70]$15.00 MXN										[url=num_prod][img=100]assets/shopping-cart-01-svgrepo-com.svg[/img][/url][/font_size]"
 fit_content = true
+meta_underlined = false
