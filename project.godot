@@ -15,6 +15,9 @@ run/main_scene="uid://cfujo3d5gw2lc"
 config/features=PackedStringArray("4.4", "Mobile")
 run/low_processor_mode=true
 boot_splash/bg_color=Color(0.92549, 0.956863, 0.913725, 1)
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [display]
@@ -22,6 +25,8 @@ config/icon="res://icon.svg"
 window/size/viewport_width=1080
 window/size/viewport_height=1920
 window/handheld/orientation=1
+window/ios/hide_home_indicator=false
+window/ios/hide_status_bar=false
 
 [editor_plugins]
 
