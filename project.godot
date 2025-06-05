@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="progra-6"
+config/name="App 1"
+config/version="1.0.0"
 run/main_scene="uid://cfujo3d5gw2lc"
 config/features=PackedStringArray("4.4", "Mobile")
 run/low_processor_mode=true
@@ -18,7 +19,7 @@ boot_splash/bg_color=Color(0.92549, 0.956863, 0.913725, 1)
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://icon.svg"
+config/icon="uid://byyq3nwh2rowq"
 
 [display]
 
